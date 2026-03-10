@@ -1,0 +1,346 @@
+#+TITLE: Final Project Pip Interpreter
+# Set defaults including to use Valgrind off the bat for all tests.
+#+TESTY: PREFIX="proj"
+#+TESTY: USE_VALGRIND=1
+* Run main() and Return Int
+#+TESTY: program='./interpreter examples/00_return.pi '
+Runs the program on the example/00_return.pi file, which has a main function that immediately returns 1
+#+BEGIN_SRC sh
+main returned 1
+
+#+END_SRC
+
+* Run main() and Return Bool
+#+TESTY: program='./interpreter examples/01_return_bool.pi '
+#+BEGIN_SRC sh
+main returned true
+
+#+END_SRC
+
+* main() Doesn't Return
+#+TESTY: program='./interpreter examples/02_dont_return.pi'
+#+BEGIN_SRC sh
+ERROR: Function main did not return!
+main returned an invalid result!
+
+#+END_SRC
+
+* Print Integer
+#+TESTY: program='./interpreter examples/03_print_int.pi'
+#+BEGIN_SRC sh
+1
+main returned 1
+
+#+END_SRC
+
+* Print Bool
+#+TESTY: program='./interpreter examples/04_print_bool.pi'
+#+BEGIN_SRC sh
+true
+main returned 1
+
+#+END_SRC
+
+* Arithmetic Binary Operations
+#+TESTY: program='./interpreter examples/05_arith_binop.pi'
+#+BEGIN_SRC sh
+2
+1
+6
+2
+main returned true
+
+#+END_SRC
+
+* Boolean Binary Operations
+#+TESTY: program='./interpreter examples/06_bool_binop.pi'
+#+BEGIN_SRC sh
+true
+false
+false
+false
+true
+true
+true
+false
+true
+false
+true
+true
+true
+false
+main returned true
+
+#+END_SRC
+* If Statement
+#+TESTY: program='./interpreter examples/07_if.pi'
+#+BEGIN_SRC sh
+true
+main returned 1
+
+#+END_SRC
+* If-Else Statement
+#+TESTY: program='./interpreter examples/08_if_else.pi'
+#+BEGIN_SRC sh
+true
+false
+main returned 1
+
+#+END_SRC
+* If Statement with Multiple Statements in Then Block
+#+TESTY: program='./interpreter examples/09_if_block.pi'
+#+BEGIN_SRC sh
+true
+3
+false
+97
+main returned 1
+
+#+END_SRC
+* Variable Assignment
+#+TESTY: program='./interpreter examples/10_assignment.pi'
+#+BEGIN_SRC sh
+3
+4
+-95
+main returned true
+
+#+END_SRC
+* While Statement
+#+TESTY: program='./interpreter examples/11_while.pi'
+#+BEGIN_SRC sh
+0
+1
+2
+3
+4
+main returned 1
+
+#+END_SRC
+* Test of If Scoping
+#+TESTY: program='./interpreter examples/12_if_scoping.pi'
+#+BEGIN_SRC sh
+1
+42
+main returned 1
+
+#+END_SRC
+* Test of While Scoping
+#+TESTY: program='./interpreter examples/13_while_scoping.pi'
+#+BEGIN_SRC sh
+0
+1
+2
+3
+4
+1
+main returned 1
+
+#+END_SRC
+* Function Call
+#+TESTY: program='./interpreter examples/14_fn_call.pi'
+#+BEGIN_SRC sh
+true
+25
+main returned 0
+
+#+END_SRC
+* Modulus Test Program
+#+TESTY: program='./interpreter examples/15_modulus.pi'
+#+BEGIN_SRC sh
+9
+3
+6
+9
+12
+15
+18
+main returned 0
+
+#+END_SRC
+* Collatz Test Program
+#+TESTY: program='./interpreter examples/16_collatz.pi'
+#+BEGIN_SRC sh
+55
+166
+83
+250
+125
+376
+188
+94
+47
+142
+71
+214
+107
+322
+161
+484
+242
+121
+364
+182
+91
+274
+137
+412
+206
+103
+310
+155
+466
+233
+700
+350
+175
+526
+263
+790
+395
+1186
+593
+1780
+890
+445
+1336
+668
+334
+167
+502
+251
+754
+377
+1132
+566
+283
+850
+425
+1276
+638
+319
+958
+479
+1438
+719
+2158
+1079
+3238
+1619
+4858
+2429
+7288
+3644
+1822
+911
+2734
+1367
+4102
+2051
+6154
+3077
+9232
+4616
+2308
+1154
+577
+1732
+866
+433
+1300
+650
+325
+976
+488
+244
+122
+61
+184
+92
+46
+23
+70
+35
+106
+53
+160
+80
+40
+20
+10
+5
+16
+8
+4
+2
+main returned 1
+
+#+END_SRC
+* Sum of Squares Test Program
+#+TESTY: program='./interpreter examples/17_sum_of_squares.pi'
+#+BEGIN_SRC sh
+420
+main returned 21
+
+#+END_SRC
+* Factorial Test Program
+#+TESTY: program='./interpreter examples/18_factorial.pi'
+#+BEGIN_SRC sh
+1
+120
+3628800
+main returned 1
+
+#+END_SRC
+* Recursive Factorial
+#+TESTY: program='./interpreter examples/19_recursion.pi'
+#+BEGIN_SRC sh
+1
+120
+3628800
+main returned 1
+
+#+END_SRC
+* Error Test: Too Few Arguments Provided to Function
+#+TESTY: program='./interpreter examples/20_too_few_arguments.pi'
+#+BEGIN_SRC sh
+ERROR: Function random called with too few arguments!
+main returned an invalid result!
+
+#+END_SRC
+* Error Test: Call of Undefined Function
+#+TESTY: program='./interpreter examples/21_invalid_func.pi'
+#+BEGIN_SRC sh
+ERROR: Tried to call invalid function fib
+main returned an invalid result!
+
+#+END_SRC
+* Error Test: Caller variables can't be accessed
+#+TESTY: program='./interpreter examples/22_invalid_scope.pi'
+#+BEGIN_SRC sh
+ERROR: Couldn't find variable x in scope
+main returned an invalid result!
+
+#+END_SRC
+* Error Test: Callee variables can't be accessed
+#+TESTY: program='./interpreter examples/23_invalid_arg_scope.pi'
+#+BEGIN_SRC sh
+ERROR: Couldn't find variable a in scope
+main returned an invalid result!
+
+#+END_SRC
+* Stress Test
+#+TESTY: program='./interpreter examples/24_stress_test.pi'
+#+BEGIN_SRC sh
+144
+233
+false
+true
+23
+523
+1217
+false
+ERROR: Couldn't find variable a in scope
+main returned an invalid result!
+
+#+END_SRC

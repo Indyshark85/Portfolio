@@ -1,0 +1,35 @@
+print
+structure
+add John 
+add Nepeta
+print
+structure
+add Vriska
+add Sollux
+add Karkat
+add Dave
+print
+structure
+contains John
+contains Dave
+contains Rose
+contains Vriska
+save hs.hashset
+clear
+print
+structure
+add Jade
+add Davesprite
+structure
+load rm.hashset
+structure
+expand
+print
+structure
+add John
+add Dirk
+add Sollux
+structure
+expand
+structure
+quit

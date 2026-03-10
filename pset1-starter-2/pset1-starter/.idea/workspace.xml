@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0c0821f7-3d1a-4cbe-b2ec-cd4bc89ced32" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2gt8Xavxns3Rbwi0Xv2lyNbbzdB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.Problem10KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem10KeyTest.problem10Test5.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem11KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem12KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem12KeyTester.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem14KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem1KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem1Test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem2KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem2Test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem3KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem4KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem4KeyTest.problem4Test1.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem5KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem6KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem7KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem8KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Problem9KeyTest.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/joshuacrotts/downloads/pset1-starter&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Java&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.Problem1Test">
+    <configuration name="Problem10KeyTest.problem10Test5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="A1-Key" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Problem10KeyTest" />
+      <option name="METHOD_NAME" value="problem10Test5" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Problem11KeyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="A1-Key" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Problem11KeyTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Problem13KeyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="A1-Key" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Problem13KeyTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Problem14KeyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="A1-Key" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Problem14KeyTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Problem1Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="pset1-starter" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Problem1Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="A1-Key" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="A1-Key" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Problem1Test" />
+        <item itemvalue="JUnit.Problem14KeyTest" />
+        <item itemvalue="JUnit.Problem13KeyTest" />
+        <item itemvalue="JUnit.Problem11KeyTest" />
+        <item itemvalue="JUnit.Problem10KeyTest.problem10Test5" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.419" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.419" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0c0821f7-3d1a-4cbe-b2ec-cd4bc89ced32" name="Changes" comment="" />
+      <created>1716505554754</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716505554754</updated>
+      <workItem from="1716505555586" duration="69000" />
+      <workItem from="1716505689999" duration="652000" />
+      <workItem from="1717436898353" duration="887000" />
+      <workItem from="1717454014566" duration="6796000" />
+      <workItem from="1724869325617" duration="158000" />
+      <workItem from="1724869676819" duration="611000" />
+      <workItem from="1724889507902" duration="56000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

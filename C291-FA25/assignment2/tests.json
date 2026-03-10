@@ -1,0 +1,129 @@
+[
+  {
+    "test_name": "A2 - Help Command",
+    "program": "str_manip",
+    "input_lines": ["help", "quit"],
+    "final_output": "\nPossible commands:\n\n  reverse <str>                      : Reverses the input string\n  word_count <str>                   : Counts the number of words\n  to_upper <str>                     : Capitalizes all letters\n  cat <str1> <str2> ...              : Concatenates strings together\n  interleave <str1> <str2> ...       : Interleaves strings together\n  split_on <delim> <str>             : Splits a string by a delimiter\n  search <key> <str>                 : Counts exact matches of key in str\n  fuzzy_search <key> <str>           : Finds words similar to key\n  parse_hex <hex_str>                : Converts hex string to an integer\n  grammar_check <str>                : Capitalizes first letter of sentences\n  help                               : Prints this help text\n  quit                               : Terminates the program\n\n"
+  },
+  {
+    "test_name": "A2 - Reverse - Standard",
+    "program": "str_manip",
+    "input_lines": ["reverse \"foo bar\"", "quit"],
+    "final_output": "\"rab oof\""
+  },
+  {
+    "test_name": "A2 - Reverse - Empty String",
+    "program": "str_manip",
+    "input_lines": ["reverse \"\"", "quit"],
+    "final_output": "\"\""
+  },
+  {
+    "test_name": "A2 - Word Count - Standard",
+    "program": "str_manip",
+    "input_lines": ["word_count \" a b c \"", "quit"],
+    "final_output": "3"
+  },
+  {
+    "test_name": "A2 - Word Count - Multiple Spaces",
+    "program": "str_manip",
+    "input_lines": ["word_count \"hello   world\"", "quit"],
+    "final_output": "2"
+  },
+  {
+    "test_name": "A2 - To Upper",
+    "program": "str_manip",
+    "input_lines": ["to_upper \"Hello World 123!\"", "quit"],
+    "final_output": "\"HELLO WORLD 123!\""
+  },
+  {
+    "test_name": "A2 - Concatenate - Multiple",
+    "program": "str_manip",
+    "input_lines": ["cat \"foo\" \"bar\" \"baz\"", "quit"],
+    "final_output": "\"foo bar baz\""
+  },
+  {
+    "test_name": "A2 - Concatenate - Single",
+    "program": "str_manip",
+    "input_lines": ["cat \"hello\"", "quit"],
+    "final_output": "\"hello\""
+  },
+  {
+    "test_name": "A2 - Interleave - Standard",
+    "program": "str_manip",
+    "input_lines": ["interleave \"abc\" \"123\" \"xyz\"", "quit"],
+    "final_output": "\"a1xb2yc3z\""
+  },
+  {
+
+    "test_name": "A2 - Interleave - Uneven Strings",
+
+    "program": "str_manip",
+
+    "input_lines": ["interleave \"hl\" \"el !wrd\" \"loo\""],
+
+    "expected_prompts": [],
+
+    "final_output": "\"helllo o!wrd\""
+
+  },
+  {
+    "test_name": "A2 - Split On",
+    "program": "str_manip",
+    "input_lines": ["split_on , \"foo, bar, baz\"", "quit"],
+    "final_output": "[\"foo\", \"bar\", \"baz\"]"
+  },
+  {
+    "test_name": "A2 - Split On - No Delimiter",
+    "program": "str_manip",
+    "input_lines": ["split_on - \"hello world\"", "quit"],
+    "final_output": "[\"hello world\"]"
+  },
+  {
+    "test_name": "A2 - Search - Multiple Matches",
+    "program": "str_manip",
+    "input_lines": ["search foo foowazfoo", "quit"],
+    "final_output": "found 2 matches."
+  },
+    {
+    "test_name": "A2 - Search - No Matches",
+    "program": "str_manip",
+    "input_lines": ["search test \"hello world\"", "quit"],
+    "final_output": "found 0 matches."
+  },
+  {
+    "test_name": "A2 - Fuzzy Search",
+    "program": "str_manip",
+    "input_lines": ["fuzzy_search foo \"foo goo groo bwap\"", "quit"],
+    "final_output": "found 3 matches:\n\"foo\"\n\"goo\"\n\"groo\""
+  },
+  {
+    "test_name": "A2 - Parse Hex - Uppercase",
+    "program": "str_manip",
+    "input_lines": ["parse_hex 1321DF", "quit"],
+    "final_output": "as hex: 1321DF\nas decimal: 1253855"
+  },
+  {
+    "test_name": "A2 - Parse Hex - Lowercase",
+    "program": "str_manip",
+    "input_lines": ["parse_hex ff", "quit"],
+    "final_output": "as hex: FF\nas decimal: 255"
+  },
+  {
+    "test_name": "A2 - Grammar Check - Standard",
+    "program": "str_manip",
+    "input_lines": ["grammar_check \"hello! how are you? i'm fine.\"", "quit"],
+    "final_output": "\"Hello! How are you? I'm fine.\""
+  },
+    {
+    "test_name": "A2 - Grammar Check - No Punctuation",
+    "program": "str_manip",
+    "input_lines": ["grammar_check \"first sentence second sentence\"", "quit"],
+    "final_output": "\"First sentence second sentence\""
+  },
+  {
+    "test_name": "A2 - Unknown Command",
+    "program": "str_manip",
+    "input_lines": ["testcommand", "quit"],
+    "final_output": "Unknown command or incorrect number of arguments. Type 'help' for a list of commands."
+  }
+]

@@ -1,0 +1,13 @@
+fn main()
+  a = 0;
+  if 1 < 2 then
+    a = 1;
+    b = 42;
+  else 
+    a = 2;
+    b = 99;
+  fi
+  print a;
+  print b;
+  return 1;
+end

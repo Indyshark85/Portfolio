@@ -1,0 +1,135 @@
+Hashset Application
+Commands:
+  hashcode <elem>  : prints out the numeric hash code for the given key (does not change the hash set)
+  contains <elem>  : prints the value associated with the given element or NOT PRESENT
+  add <elem>       : inserts the given element into the hash set, reports existing element
+  print            : prints all elements in the hash set in the order they were addded
+  structure        : prints detailed structure of the hash set
+  clear            : reinitializes hash set to be empty with default size
+  save <file>      : writes the contents of the hash set to the given file
+  load <file>      : clears the current hash set and loads the one in the given file
+  next_prime <int> : if <int> is prime, prints it, otherwise finds the next prime and prints it
+  expand           : expands memory size of hash set to reduce its load factor
+  quit             : exit the program
+HS>> load data/hs.hashset
+HS>> structure
+elem_count: 6
+table_size: 5
+order_first: John
+order_last : Dave
+load_factor: 1.2000
+[ 0] : {-2054697310 Karkat >>Dave}
+[ 1] : {-1965180551 Nepeta >>Vriska}
+[ 2] : {-1724336932 Vriska >>Sollux}
+[ 3] :
+[ 4] : {2122764 Dave >>NULL} {-1812911969 Sollux >>Karkat} {2314539 John >>Nepeta}
+HS>> expand
+HS>> structure
+elem_count: 6
+table_size: 11
+order_first: John
+order_last : Dave
+load_factor: 0.5455
+[ 0] : {-1812911969 Sollux >>Karkat}
+[ 1] :
+[ 2] :
+[ 3] :
+[ 4] : {-1965180551 Nepeta >>Vriska}
+[ 5] :
+[ 6] : {2122764 Dave >>NULL} {-2054697310 Karkat >>Dave}
+[ 7] : {2314539 John >>Nepeta}
+[ 8] :
+[ 9] :
+[10] : {-1724336932 Vriska >>Sollux}
+HS>> add Nepeta
+Elem already present, no changes made
+HS>> add Terezi
+HS>> add Gamzee
+HS>> structure
+elem_count: 8
+table_size: 11
+order_first: John
+order_last : Gamzee
+load_factor: 0.7273
+[ 0] : {-1812911969 Sollux >>Karkat}
+[ 1] :
+[ 2] :
+[ 3] :
+[ 4] : {-1965180551 Nepeta >>Vriska}
+[ 5] : {2125618951 Gamzee >>NULL}
+[ 6] : {2122764 Dave >>Terezi} {-2054697310 Karkat >>Dave}
+[ 7] : {-1793345869 Terezi >>Gamzee} {2314539 John >>Nepeta}
+[ 8] :
+[ 9] :
+[10] : {-1724336932 Vriska >>Sollux}
+HS>> save test-results/expanded.tm
+HS>> clear
+HS>> structure
+elem_count: 0
+table_size: 5
+order_first: NULL
+order_last : NULL
+load_factor: 0.0000
+[ 0] :
+[ 1] :
+[ 2] :
+[ 3] :
+[ 4] :
+HS>> load test-results/expanded.tm
+HS>> structure
+elem_count: 8
+table_size: 11
+order_first: John
+order_last : Gamzee
+load_factor: 0.7273
+[ 0] : {-1812911969 Sollux >>Karkat}
+[ 1] :
+[ 2] :
+[ 3] :
+[ 4] : {-1965180551 Nepeta >>Vriska}
+[ 5] : {2125618951 Gamzee >>NULL}
+[ 6] : {2122764 Dave >>Terezi} {-2054697310 Karkat >>Dave}
+[ 7] : {-1793345869 Terezi >>Gamzee} {2314539 John >>Nepeta}
+[ 8] :
+[ 9] :
+[10] : {-1724336932 Vriska >>Sollux}
+HS>> print
+  1 John
+  2 Nepeta
+  3 Vriska
+  4 Sollux
+  5 Karkat
+  6 Dave
+  7 Terezi
+  8 Gamzee
+HS>> load data/alphabet_expand.hashset
+HS>> structure
+elem_count: 52
+table_size: 23
+order_first: A
+order_last : z
+load_factor: 2.2609
+[ 0] : {115 s >>t} {69 E >>F}
+[ 1] : {116 t >>u} {70 F >>G}
+[ 2] : {117 u >>v} {71 G >>H}
+[ 3] : {118 v >>w} {72 H >>I}
+[ 4] : {119 w >>x} {73 I >>J}
+[ 5] : {120 x >>y} {97 a >>b} {74 J >>K}
+[ 6] : {121 y >>z} {98 b >>c} {75 K >>L}
+[ 7] : {122 z >>NULL} {99 c >>d} {76 L >>M}
+[ 8] : {100 d >>e} {77 M >>N}
+[ 9] : {101 e >>f} {78 N >>O}
+[10] : {102 f >>g} {79 O >>P}
+[11] : {103 g >>h} {80 P >>Q}
+[12] : {104 h >>i} {81 Q >>R}
+[13] : {105 i >>j} {82 R >>S}
+[14] : {106 j >>k} {83 S >>T}
+[15] : {107 k >>l} {84 T >>U}
+[16] : {108 l >>m} {85 U >>V}
+[17] : {109 m >>n} {86 V >>W}
+[18] : {110 n >>o} {87 W >>X}
+[19] : {111 o >>p} {88 X >>Y} {65 A >>B}
+[20] : {112 p >>q} {89 Y >>Z} {66 B >>C}
+[21] : {113 q >>r} {90 Z >>a} {67 C >>D}
+[22] : {114 r >>s} {68 D >>E}
+HS>> quit

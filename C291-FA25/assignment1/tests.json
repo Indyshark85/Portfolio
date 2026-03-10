@@ -1,0 +1,170 @@
+[
+  {
+    "test_name": "Problem 1: Example 1",
+    "program": "./p1_phone",
+    "input": "n\ny\nn",
+    "expected_output": "Is it morning?: Is mom calling?: Am I sleeping?: You answer the phone"
+  },
+  {
+    "test_name": "Problem 1: Example 2 (Sleeping)",
+    "program": "./p1_phone",
+    "input": "n\ny\ny",
+    "expected_output": "Is it morning?: Is mom calling?: Am I sleeping?: You don't answer the phone"
+  },
+  {
+    "test_name": "Problem 1: Morning, Not Mom",
+    "program": "./p1_phone",
+    "input": "y\nn\nn",
+    "expected_output": "Is it morning?: Is mom calling?: Am I sleeping?: You don't answer the phone"
+  },
+  {
+    "test_name": "Problem 2: Right Triangle",
+    "program": "./p2_triangle",
+    "input": "60\n30\n90",
+    "expected_output": "Input first angle: Input second angle: Input third angle: valid right"
+  },
+  {
+    "test_name": "Problem 2: Equilateral Triangle",
+    "program": "./p2_triangle",
+    "input": "60\n60\n60",
+    "expected_output": "Input first angle: Input second angle: Input third angle: valid acute isosceles equilateral"
+  },
+  {
+    "test_name": "Problem 2: Isosceles Obtuse",
+    "program": "./p2_triangle",
+    "input": "100\n40\n40",
+    "expected_output": "Input first angle: Input second angle: Input third angle: valid obtuse isosceles"
+  },
+  {
+    "test_name": "Problem 2: Invalid Input",
+    "program": "./p2_triangle",
+    "input": "80\n-20\n120",
+    "expected_output": "Input first angle: Input second angle: Input third angle: Invalid"
+  },
+  {
+    "test_name": "Problem 3: Exponentiation",
+    "program": "./p3_calculator",
+    "input": "2 ^ 32",
+    "expected_output": "Enter expression: 4294967296.00"
+  },
+  {
+    "test_name": "Problem 3: Division by Zero",
+    "program": "./p3_calculator",
+    "input": "1 / 0",
+    "expected_output": "Enter expression: Error: dividing by zero"
+  },
+  {
+    "test_name": "Problem 3: Modulo",
+    "program": "./p3_calculator",
+    "input": "10 % 3",
+    "expected_output": "Enter expression: 1.00"
+  },
+  {
+    "test_name": "Problem 3: Root",
+    "program": "./p3_calculator",
+    "input": "3 r 27",
+    "expected_output": "Enter expression: 3.00"
+  },
+  {
+    "test_name": "Problem 4: Admin (High Income)",
+    "program": "./p4_income",
+    "input": "A\n12500\ny",
+    "expected_output": "Input employee type: Input monthly salary: Is this employee married?: This employee's annual income is $150000.00 before tax and $112500.00 after tax."
+  },
+  {
+    "test_name": "Problem 4: Staff (Overtime)",
+    "program": "./p4_income",
+    "input": "S\n5000\n15\ny",
+    "expected_output": "Input employee type: Input monthly salary: Input overtime hours each month: Overtime hours exceed limit. Only 10 hours will be counted.\nIs this employee married?: This employee's annual income is $66250.00 before tax and $49687.50 after tax."
+  },
+  {
+    "test_name": "Problem 5: Domain Names",
+    "program": "./p5_domain",
+    "input": "",
+    "expected_output": "www.zz.com"
+  },
+  {
+    "test_name": "Problem 6: Composite Number",
+    "program": "./p6_prime",
+    "input": "147",
+    "expected_output": "Enter a positive integer that you wish to find prime factors of: The prime factorization of 147 is: 3 7 7"
+  },
+  {
+    "test_name": "Problem 6: Prime Number",
+    "program": "./p6_prime",
+    "input": "79",
+    "expected_output": "Enter a positive integer that you wish to find prime factors of: The prime factorization of 79 is: 79"
+  },
+  {
+    "test_name": "Problem 6: Input is 1",
+    "program": "./p6_prime",
+    "input": "1",
+    "expected_output": "Enter a positive integer that you wish to find prime factors of: 1 has no prime factorization"
+  },
+  {
+    "test_name": "Problem 7: Standard Case",
+    "program": "./p7_fizzbuzz",
+    "input": "15",
+    "expected_output": "Enter the starting Fizz Buzz number: Fizz-Buzz 14 13 Fizz\n11 Buzz Fizz 8\n7 Fizz Buzz 4\nFizz 2 1"
+  },
+  {
+    "test_name": "Problem 7: Error Case",
+    "program": "./p7_fizzbuzz",
+    "input": "-1",
+    "expected_output": "Enter the starting Fizz Buzz number: Error: Cannot compute Fizz Buzz of -1"
+  },
+  {
+    "test_name": "Problem 7: Small Number",
+    "program": "./p7_fizzbuzz",
+    "input": "7",
+    "expected_output": "Enter the starting Fizz Buzz number: 7 Fizz Buzz 4\nFizz 2 1"
+  },
+  {
+    "test_name": "Problem 8: Standard Case",
+    "program": "./p8_binary",
+    "input": "18",
+    "expected_output": "Enter a number to find the reverse binary representation: 01001"
+  },
+  {
+    "test_name": "Problem 8: Zero",
+    "program": "./p8_binary",
+    "input": "0",
+    "expected_output": "Enter a number to find the reverse binary representation: 0"
+  },
+  {
+    "test_name": "Problem 8: Power of 2",
+    "program": "./p8_binary",
+    "input": "16",
+    "expected_output": "Enter a number to find the reverse binary representation: 00001"
+  },
+  {
+    "test_name": "Problem 9: Default Conditions",
+    "program": "./p9_predator",
+    "input": "40\n9",
+    "expected_output": "Enter initial prey population (x): Enter initial predator population (y): Time step: 1000, Prey (x): 2.88, Predators (y): 17.86"
+  },
+ {
+    "test_name": "Problem 9: Different Initial Conditions",
+    "program": "./p9_predator",
+    "input": "9\n40",
+    "expected_output": "Enter initial prey population (x): Enter initial predator population (y): Time step: 1000, Prey (x): 0.09, Predators (y): 16.96"
+  },
+  {
+    "test_name": "Problem 10: Encryption",
+    "program": "./p10_encryption",
+    "input": "1234\ne",
+    "expected_output": "Enter a four-digit integer: Enter 'e' for encryption or 'd' for decryption: Encrypted number: 0189"
+  },
+  {
+    "test_name": "Problem 10: Decryption",
+    "program": "./p10_encryption",
+    "input": "0189\nd",
+    "expected_output": "Enter a four-digit integer: Enter 'e' for encryption or 'd' for decryption: Decrypted number: 1234"
+  },
+  {
+    "test_name": "Problem 10: Another Decryption",
+    "program": "./p10_encryption",
+    "input": "4444\nd",
+    "expected_output": "Enter a four-digit integer: Enter 'e' for encryption or 'd' for decryption: Decrypted number: 7777"
+  }
+]

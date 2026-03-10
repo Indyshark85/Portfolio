@@ -1,0 +1,12 @@
+EVar.    Expr   ::= Ident ;
+ETrue.   Expr   ::= "true" ;
+EFalse.  Expr   ::= "false" ;
+EInt.    Expr   ::= Integer ;
+EBinOp.  Expr   ::= Expr Binop Expr ;
+_.       Expr   ::= "(" Expr ")" ;
+
+Add.    Binop ::= "+";
+Sub.    Binop ::= "-";
+Eq.     Binop ::= "==";
+Lt.     Binop ::= "<";
+And.    Binop ::= "&&";

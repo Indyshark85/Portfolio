@@ -1,0 +1,9 @@
+11 8
+ 1 John
+ 2 Nepeta
+ 3 Vriska
+ 4 Sollux
+ 5 Karkat
+ 6 Dave
+ 7 Terezi
+ 8 Gamzee

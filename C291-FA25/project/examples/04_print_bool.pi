@@ -1,0 +1,4 @@
+fn main()
+    print true;
+    return 1;
+end

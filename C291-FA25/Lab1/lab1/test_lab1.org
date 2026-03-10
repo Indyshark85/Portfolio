@@ -1,0 +1,25 @@
+#+TITLE: Problem 3 hashset_main application
+# Set defaults including to use Valgrind off the bat for all tests.
+#+TESTY: PREFIX="lab1"
+#+TESTY: PROGRAM='./containers'
+#+TESTY: USE_VALGRIND=1
+* Main Test
+Runs the program, making sure the expected behavior of the main() function is demonstrated
+#+BEGIN_SRC sh
+Initial Tree:
+10
+20
+30
+Initial List:
+1 2 3 
+Initial Array:
+100 200 300 
+Mapped Tree:
+12
+22
+32
+Mapped List:
+3 4 5 
+Mapped Array:
+102 202 302 
+#+END_SRC

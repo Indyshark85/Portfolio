@@ -1,0 +1,17 @@
+fn factorial(x)
+  result = 1;
+  counter = 1;
+  while counter <= x do
+    result = result * counter;
+    counter = counter + 1;
+  end
+  return result;
+end
+
+
+fn main()
+  print factorial(1);
+  print factorial(5);
+  print factorial(10);
+  return 1;
+end

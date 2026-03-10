@@ -1,0 +1,15 @@
+==3005791== Memcheck, a memory error detector
+==3005791== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3005791== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3005791== Command: ./scapegoat trees/example.pairs lookup 2 insert 2 99.9 lookup 2
+==3005791== Parent PID: 3005790
+==3005791== 
+==3005791== 
+==3005791== HEAP SUMMARY:
+==3005791==     in use at exit: 0 bytes in 0 blocks
+==3005791==   total heap usage: 7 allocs, 7 frees, 8,848 bytes allocated
+==3005791== 
+==3005791== All heap blocks were freed -- no leaks are possible
+==3005791== 
+==3005791== For lists of detected and suppressed errors, rerun with: -s
+==3005791== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

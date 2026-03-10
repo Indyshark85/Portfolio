@@ -1,0 +1,15 @@
+fn mod(a, b)
+  return a - ((a/b) * b);
+end
+
+fn main()
+  print mod(99,10);
+  x = 1;
+  while x <= 20 do
+    if (mod(x,3) == 0) then
+      print x;
+    fi
+    x = x + 1;
+  end
+  return 0;
+end

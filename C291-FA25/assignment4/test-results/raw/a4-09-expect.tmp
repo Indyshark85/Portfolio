@@ -1,0 +1,18 @@
+40
+  2
+    1
+    20
+40
+  2
+    1
+    20
+  50
+    80
+      70
+        60
+      99
+        90
+Key 99 found in tree with value 1.000000
+Key 70 found in tree with value 70.000000
+Key 60 found in tree with value 60.000000
+

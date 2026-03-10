@@ -1,0 +1,10 @@
+fn main()
+  a = 0;
+  while (a < 5) do
+    print a;
+    b = 1;
+    a = a + 1;
+  end
+  print b;
+  return 1;
+end

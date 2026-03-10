@@ -1,0 +1,39 @@
+Hashset Application
+Commands:
+  hashcode <elem>  : prints out the numeric hash code for the given key (does not change the hash set)
+  contains <elem>  : prints the value associated with the given element or NOT PRESENT
+  add <elem>       : inserts the given element into the hash set, reports existing element
+  print            : prints all elements in the hash set in the order they were addded
+  structure        : prints detailed structure of the hash set
+  clear            : reinitializes hash set to be empty with default size
+  save <file>      : writes the contents of the hash set to the given file
+  load <file>      : clears the current hash set and loads the one in the given file
+  next_prime <int> : if <int> is prime, prints it, otherwise finds the next prime and prints it
+  expand           : expands memory size of hash set to reduce its load factor
+  quit             : exit the program
+HS>> load data/hs.hashset
+HS>> print
+  1 John
+  2 Nepeta
+  3 Vriska
+  4 Sollux
+  5 Karkat
+  6 Dave
+HS>> structure
+elem_count: 6
+table_size: 5
+order_first: John
+order_last : Dave
+load_factor: 1.2000
+[ 0] : {-2054697310 Karkat >>Dave}
+[ 1] : {-1965180551 Nepeta >>Vriska}
+[ 2] : {-1724336932 Vriska >>Sollux}
+[ 3] :
+[ 4] : {2122764 Dave >>NULL} {-1812911969 Sollux >>Karkat} {2314539 John >>Nepeta}
+HS>> contains Dave
+FOUND: Dave
+HS>> contains Karkat
+FOUND: Karkat
+HS>> contains Roxy
+NOT PRESENT
+HS>> quit

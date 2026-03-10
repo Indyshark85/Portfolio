@@ -1,0 +1,15 @@
+==798773== Memcheck, a memory error detector
+==798773== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==798773== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==798773== Command: ./hashset_main -echo
+==798773== Parent PID: 798772
+==798773== 
+==798773== 
+==798773== HEAP SUMMARY:
+==798773==     in use at exit: 0 bytes in 0 blocks
+==798773==   total heap usage: 53 allocs, 53 frees, 4,200 bytes allocated
+==798773== 
+==798773== All heap blocks were freed -- no leaks are possible
+==798773== 
+==798773== For lists of detected and suppressed errors, rerun with: -s
+==798773== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

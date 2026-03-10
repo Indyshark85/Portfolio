@@ -1,0 +1,9 @@
+fn avg(a, b)
+  print true;
+  return (a + b)/2;
+end
+
+fn main()
+  print avg(20,30);
+  return 0;
+end

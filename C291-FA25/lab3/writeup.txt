@@ -1,0 +1,53 @@
+To prepare for the exam, here you will be given a handful of questions that are similar to what might appear on the exam.
+On the exam these will be of course on paper, while here you will have to type them out so you can submit them to github.
+It could be a useful exercise to write your answers on paper first to get exam practice, and what you might want on a cheat sheet.
+
+Question 1:
+
+Write a tagged union named `result_t` that can contain one of the following:
+1. An integer
+2. An array of 8 characters
+
+Question 2:
+Observe the following C type:
+
+```
+typedef struct {
+  enum { is_int, is_string, is_int_array } tag;
+  union {
+    int i;
+    char* s;
+    struct {
+      int* arr;
+      unsigned int size;
+    };
+  }
+} eq_t;
+```
+
+Write a function
+`result_t equal(eq_t* a, eq_t b)`
+which returns a result_t containing a 1 if two elements of the same type are given, and  the elements are equal, a result_t containing 0 if different elements of the same type are given, or a result_t containing "ERR" if elements of different type are given.
+For example, `eq` is called on a `eq_t` containing an `int` and an `eq`_t` containng an `int` array, the program should return a result_t containing `ERR`.
+
+Question 3:
+Observe the following C type:
+```
+typedef struct node {
+  int data;
+  struct node* next;
+} node_t;
+```
+
+Using this, write a function `int fold_list(node_t* list, int(*fn)(int,int))`
+Which takes in a `node_t`, and a function pointer to a function that takes in 2 integers, and returns an integer. The function should accumulate all of the values in the list with the function.
+As an example, if we fed in addition as the function, `fold_list` should add all of the elements of the list together. Likewise, if multipication was the second argument, then it should multiply all of the elements of the list together, etc.
+In the case where there is only 1 element in the list, return that element.
+If there are no elements in the list, return -1.
+
+
+-----------------------------------------
+Because questions 1/2 rely on a type you need to write, we can't automatically test them, as such this lab will be graded by hand (for each question).
+It would be wise to check your work with some inputs yourself to make sure they work how they should.
+Question 3 has some testing code provided in `main()` that you can use to check your work (what _should_ it print?). On the exam, some expected input/outut behavior will be provided, but you natrually won't be able to run your code.
+

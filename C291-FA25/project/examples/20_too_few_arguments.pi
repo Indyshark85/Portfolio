@@ -1,0 +1,8 @@
+fn random(a,b,c,d,e,f)
+  return ((a * b) - c) > e;
+end
+
+fn main()
+  random(1,2,3,4,5);
+  return a;
+end

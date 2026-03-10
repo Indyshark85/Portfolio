@@ -1,0 +1,18 @@
+Initial Tree:
+10
+20
+30
+
+Initial List:
+1 2 3 
+Initial Array:
+100 200 300 
+Mapped Tree:
+12
+22
+32
+
+Mapped List:
+3 4 5 
+Mapped Array:
+102 202 302 

@@ -1,0 +1,26 @@
+>> cat test-results/ver1.tmp
+5 4
+  1 Sollux
+  2 Tavros
+  3 Nepeta
+  4 Kanaya
+>> cat test-results/ver2.tmp
+5 9
+  1 Sollux
+  2 Tavros
+  3 Nepeta
+  4 Kanaya
+  5 John
+  6 Jane
+  7 Jade
+  8 Dave
+  9 Rose
+>> cat test-results/ver3.tmp
+5 7
+  1 Sollux
+  2 Tavros
+  3 Nepeta
+  4 Kanaya
+  5 Dirk
+  6 Jake
+  7 Davesprite

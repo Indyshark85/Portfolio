@@ -1,0 +1,15 @@
+==3203720== Memcheck, a memory error detector
+==3203720== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3203720== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3203720== Command: ./interpreter examples/07_if.pi
+==3203720== Parent PID: 3203719
+==3203720== 
+==3203720== 
+==3203720== HEAP SUMMARY:
+==3203720==     in use at exit: 0 bytes in 0 blocks
+==3203720==   total heap usage: 54 allocs, 54 frees, 26,591 bytes allocated
+==3203720== 
+==3203720== All heap blocks were freed -- no leaks are possible
+==3203720== 
+==3203720== For lists of detected and suppressed errors, rerun with: -s
+==3203720== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

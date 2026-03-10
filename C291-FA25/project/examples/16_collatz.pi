@@ -1,0 +1,20 @@
+fn mod(a, b)
+  return a - ((a/b) * b);
+end
+
+fn collatz(n)
+  if mod(n,2) == 0 then
+    return n / 2;
+  else
+    return (3 * n) + 1;
+  fi
+end
+
+fn main()
+  a = 55;
+  while a > 1  do
+    print a;
+    a = collatz(a);
+  end
+  return a;
+end

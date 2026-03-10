@@ -1,0 +1,14 @@
+fn main()
+  if 1 < 2 then
+    print true;
+    print 1 + 2;
+  fi
+  if 99 < 2 then
+    print true;
+    print 99 + 2;
+  else 
+    print false;
+    print 99 - 2;
+  fi
+  return 1;
+end

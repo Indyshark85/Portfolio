@@ -1,0 +1,45 @@
+TLCons.  TopLevel ::= FunDecl TopLevel;
+TLNil.   TopLevel ::= ;
+
+EVar.    Expr   ::= Ident ;
+ETrue.   Expr   ::= "true" ;
+EFalse.  Expr   ::= "false" ;
+EInt.    Expr   ::= Integer ;
+EBinOp.  Expr   ::= Expr Binop Expr ;
+EFnCall. Expr   ::= Ident "(" FArgs ")" ;
+_.       Expr   ::= "(" Expr ")" ;
+
+Add.    Binop ::= "+";
+Sub.    Binop ::= "-";
+Mul.    Binop ::= "*";
+Div.    Binop ::= "/";
+Lte.    Binop ::= "<=";
+Eq.     Binop ::= "==";
+Neq.    Binop ::= "!=";
+Gte.    Binop ::= ">=";
+Lt.     Binop ::= "<";
+Gt.     Binop ::= ">";
+And.    Binop ::= "&&";
+Or.     Binop ::= "||";
+
+BCons. Block ::=  State Block;
+BNil.  Block ::= ;
+
+SAssn.  State ::= Ident "=" Expr ";" ;
+SPrint. State ::= "print" Expr ";" ;
+SIf.    State ::= "if" Expr "then" Block "fi" ;
+SIfEl.  State ::= "if" Expr "then" Block "else" Block "fi" ;
+SWhile. State ::= "while" Expr "do" Block "end" ;
+SExpr.  State ::= Expr ";" ;
+SRet.   State ::= "return" Expr ";" ;
+
+FDecl. FunDecl ::= "fn" Ident "(" Args ")" Block "end" ;
+AArgs. Args ::= Ident ArgsRest ;
+ANone. Args ::= ;
+ACons. ArgsRest ::= "," Ident ArgsRest;
+ANil.  ArgsRest ::= ;
+
+FAArgs . FArgs ::= Expr FArgsRest ;
+FANone. FArgs ::= ;
+FACons. FArgsRest ::= "," Expr FArgsRest;
+FANil.  FArgsRest ::= ;

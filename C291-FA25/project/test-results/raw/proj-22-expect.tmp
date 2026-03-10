@@ -1,0 +1,3 @@
+ERROR: Tried to call invalid function fib
+main returned an invalid result!
+

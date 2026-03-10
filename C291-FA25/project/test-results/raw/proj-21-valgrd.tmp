@@ -1,0 +1,15 @@
+==3204101== Memcheck, a memory error detector
+==3204101== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3204101== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3204101== Command: ./interpreter examples/20_too_few_arguments.pi
+==3204101== Parent PID: 3204100
+==3204101== 
+==3204101== 
+==3204101== HEAP SUMMARY:
+==3204101==     in use at exit: 0 bytes in 0 blocks
+==3204101==   total heap usage: 89 allocs, 89 frees, 27,239 bytes allocated
+==3204101== 
+==3204101== All heap blocks were freed -- no leaks are possible
+==3204101== 
+==3204101== For lists of detected and suppressed errors, rerun with: -s
+==3204101== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

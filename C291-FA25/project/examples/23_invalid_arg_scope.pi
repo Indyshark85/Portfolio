@@ -1,0 +1,9 @@
+fn foolish(a,b)
+  return 1;
+end
+
+fn main()
+  y = 1;
+  foolish(3,2);
+  return a + y;
+end

@@ -1,0 +1,54 @@
+fn random(a,b,c,d,e,f)
+  return ((a * b) - c) > e;
+end
+
+fn mod(a, b)
+  return a - ((a/b) * b);
+end
+
+fn fib(n)
+  if n <= 2 then
+    return 1;
+  else
+    return fib(n-1) + fib(n-2);
+  fi 
+end
+
+
+fn is_prime(x)
+  i = 2;
+  while i < (x/2) do
+    if mod(x,i) == 0 then
+      return false;
+    fi 
+    i = i + 1;
+  end
+  return true;
+end
+
+fn get_nth_prime(n)
+  i = 2;
+  count = 0;
+  while true do
+    if is_prime(i) then
+      count = count + 1;
+    fi 
+    if count >= n then
+      return i;
+    fi 
+    i = i + 1;
+  end
+end
+
+fn main()
+  print fib(12);
+  print fib(13);
+  print is_prime(51);
+  print is_prime(397);
+  print get_nth_prime(10);
+  print get_nth_prime(100);
+  print get_nth_prime(200);
+
+  print random(1,2,3,4,5,6);
+  return a;
+end

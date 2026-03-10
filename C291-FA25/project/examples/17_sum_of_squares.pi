@@ -1,0 +1,14 @@
+fn square(x)
+  return x*x;
+end
+
+fn main()
+  a = 1;
+  b = 0;
+  while (a <= 20) do
+    b = a + square(a);
+    a = a + 1;
+  end
+  print b;
+  return a;
+end

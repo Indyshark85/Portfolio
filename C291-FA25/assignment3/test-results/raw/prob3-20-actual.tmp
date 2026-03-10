@@ -1,0 +1,542 @@
+Hashset Application
+Commands:
+  hashcode <elem>  : prints out the numeric hash code for the given key (does not change the hash set)
+  contains <elem>  : prints the value associated with the given element or NOT PRESENT
+  add <elem>       : inserts the given element into the hash set, reports existing element
+  print            : prints all elements in the hash set in the order they were addded
+  structure        : prints detailed structure of the hash set
+  clear            : reinitializes hash set to be empty with default size
+  save <file>      : writes the contents of the hash set to the given file
+  load <file>      : clears the current hash set and loads the one in the given file
+  next_prime <int> : if <int> is prime, prints it, otherwise finds the next prime and prints it
+  expand           : expands memory size of hash set to reduce its load factor
+  quit             : exit the program
+HS>> add 10
+HS>> add 20
+HS>> add 30
+HS>> add 40
+HS>> structure
+elem_count: 4
+table_size: 5
+order_first: 10
+order_last : 40
+load_factor: 0.8000
+[ 0] : {1660 40 >>NULL} 
+[ 1] : 
+[ 2] : {1567 10 >>20} 
+[ 3] : {1598 20 >>30} 
+[ 4] : {1629 30 >>40} 
+HS>> save test-results/stress1.tmp
+HS>> load data/alphabet.hashset
+HS>> structure
+elem_count: 52
+table_size: 5
+order_first: A
+order_last : z
+load_factor: 10.4000
+[ 0] : {120 x >>y} {115 s >>t} {110 n >>o} {105 i >>j} {100 d >>e} {90 Z >>a} {85 U >>V} {80 P >>Q} {75 K >>L} {70 F >>G} {65 A >>B} 
+[ 1] : {121 y >>z} {116 t >>u} {111 o >>p} {106 j >>k} {101 e >>f} {86 V >>W} {81 Q >>R} {76 L >>M} {71 G >>H} {66 B >>C} 
+[ 2] : {122 z >>NULL} {117 u >>v} {112 p >>q} {107 k >>l} {102 f >>g} {97 a >>b} {87 W >>X} {82 R >>S} {77 M >>N} {72 H >>I} {67 C >>D} 
+[ 3] : {118 v >>w} {113 q >>r} {108 l >>m} {103 g >>h} {98 b >>c} {88 X >>Y} {83 S >>T} {78 N >>O} {73 I >>J} {68 D >>E} 
+[ 4] : {119 w >>x} {114 r >>s} {109 m >>n} {104 h >>i} {99 c >>d} {89 Y >>Z} {84 T >>U} {79 O >>P} {74 J >>K} {69 E >>F} 
+HS>> expand
+HS>> expand
+HS>> structure
+elem_count: 52
+table_size: 23
+order_first: A
+order_last : z
+load_factor: 2.2609
+[ 0] : {115 s >>t} {69 E >>F} 
+[ 1] : {116 t >>u} {70 F >>G} 
+[ 2] : {117 u >>v} {71 G >>H} 
+[ 3] : {118 v >>w} {72 H >>I} 
+[ 4] : {119 w >>x} {73 I >>J} 
+[ 5] : {120 x >>y} {97 a >>b} {74 J >>K} 
+[ 6] : {121 y >>z} {98 b >>c} {75 K >>L} 
+[ 7] : {122 z >>NULL} {99 c >>d} {76 L >>M} 
+[ 8] : {100 d >>e} {77 M >>N} 
+[ 9] : {101 e >>f} {78 N >>O} 
+[10] : {102 f >>g} {79 O >>P} 
+[11] : {103 g >>h} {80 P >>Q} 
+[12] : {104 h >>i} {81 Q >>R} 
+[13] : {105 i >>j} {82 R >>S} 
+[14] : {106 j >>k} {83 S >>T} 
+[15] : {107 k >>l} {84 T >>U} 
+[16] : {108 l >>m} {85 U >>V} 
+[17] : {109 m >>n} {86 V >>W} 
+[18] : {110 n >>o} {87 W >>X} 
+[19] : {111 o >>p} {88 X >>Y} {65 A >>B} 
+[20] : {112 p >>q} {89 Y >>Z} {66 B >>C} 
+[21] : {113 q >>r} {90 Z >>a} {67 C >>D} 
+[22] : {114 r >>s} {68 D >>E} 
+HS>> print
+ 1 A
+ 2 B
+ 3 C
+ 4 D
+ 5 E
+ 6 F
+ 7 G
+ 8 H
+ 9 I
+ 10 J
+ 11 K
+ 12 L
+ 13 M
+ 14 N
+ 15 O
+ 16 P
+ 17 Q
+ 18 R
+ 19 S
+ 20 T
+ 21 U
+ 22 V
+ 23 W
+ 24 X
+ 25 Y
+ 26 Z
+ 27 a
+ 28 b
+ 29 c
+ 30 d
+ 31 e
+ 32 f
+ 33 g
+ 34 h
+ 35 i
+ 36 j
+ 37 k
+ 38 l
+ 39 m
+ 40 n
+ 41 o
+ 42 p
+ 43 q
+ 44 r
+ 45 s
+ 46 t
+ 47 u
+ 48 v
+ 49 w
+ 50 x
+ 51 y
+ 52 z
+HS>> save test-results/stress-alphabet.tmp
+HS>> clear
+HS>> print
+HS>> add John
+HS>> add Nepeta
+HS>> add Vriska
+HS>> add Dave
+HS>> add Sollux
+HS>> add Gamzee
+HS>> add Terezi
+HS>> add Jane
+HS>> add Rose
+HS>> add Sollux
+Elem already present, no changes made
+HS>> structure
+elem_count: 9
+table_size: 5
+order_first: John
+order_last : Rose
+load_factor: 1.8000
+[ 0] : 
+[ 1] : {2125618951 Gamzee >>Terezi} {-1965180551 Nepeta >>Vriska} 
+[ 2] : {2301262 Jane >>Rose} {-1724336932 Vriska >>Dave} 
+[ 3] : 
+[ 4] : {2553199 Rose >>NULL} {-1793345869 Terezi >>Jane} {-1812911969 Sollux >>Gamzee} {2122764 Dave >>Sollux} {2314539 John >>Nepeta} 
+HS>> expand
+HS>> add Dirk
+HS>> add Vriska
+Elem already present, no changes made
+HS>> structure
+elem_count: 10
+table_size: 11
+order_first: John
+order_last : Dirk
+load_factor: 0.9091
+[ 0] : {2553199 Rose >>Dirk} {-1812911969 Sollux >>Gamzee} 
+[ 1] : 
+[ 2] : 
+[ 3] : 
+[ 4] : {-1965180551 Nepeta >>Vriska} 
+[ 5] : {2125618951 Gamzee >>Terezi} 
+[ 6] : {2122764 Dave >>Sollux} 
+[ 7] : {2301262 Jane >>Rose} {-1793345869 Terezi >>Jane} {2314539 John >>Nepeta} 
+[ 8] : {2130334 Dirk >>NULL} 
+[ 9] : 
+[10] : {-1724336932 Vriska >>Dave} 
+HS>> expand
+HS>> structure
+elem_count: 10
+table_size: 23
+order_first: John
+order_last : Dirk
+load_factor: 0.4348
+[ 0] : 
+[ 1] : 
+[ 2] : {2122764 Dave >>Sollux} 
+[ 3] : {2314539 John >>Nepeta} 
+[ 4] : 
+[ 5] : {2130334 Dirk >>NULL} 
+[ 6] : {2125618951 Gamzee >>Terezi} 
+[ 7] : 
+[ 8] : 
+[ 9] : 
+[10] : 
+[11] : 
+[12] : {-1793345869 Terezi >>Jane} {-1812911969 Sollux >>Gamzee} 
+[13] : 
+[14] : 
+[15] : {2553199 Rose >>Dirk} {-1965180551 Nepeta >>Vriska} 
+[16] : 
+[17] : 
+[18] : 
+[19] : 
+[20] : {2301262 Jane >>Rose} 
+[21] : 
+[22] : {-1724336932 Vriska >>Dave} 
+HS>> save test-results/stress-hs.tmp
+HS>> load test-results/stress-alphabet.tmp
+HS>> structure
+elem_count: 52
+table_size: 23
+order_first: A
+order_last : z
+load_factor: 2.2609
+[ 0] : {115 s >>t} {69 E >>F} 
+[ 1] : {116 t >>u} {70 F >>G} 
+[ 2] : {117 u >>v} {71 G >>H} 
+[ 3] : {118 v >>w} {72 H >>I} 
+[ 4] : {119 w >>x} {73 I >>J} 
+[ 5] : {120 x >>y} {97 a >>b} {74 J >>K} 
+[ 6] : {121 y >>z} {98 b >>c} {75 K >>L} 
+[ 7] : {122 z >>NULL} {99 c >>d} {76 L >>M} 
+[ 8] : {100 d >>e} {77 M >>N} 
+[ 9] : {101 e >>f} {78 N >>O} 
+[10] : {102 f >>g} {79 O >>P} 
+[11] : {103 g >>h} {80 P >>Q} 
+[12] : {104 h >>i} {81 Q >>R} 
+[13] : {105 i >>j} {82 R >>S} 
+[14] : {106 j >>k} {83 S >>T} 
+[15] : {107 k >>l} {84 T >>U} 
+[16] : {108 l >>m} {85 U >>V} 
+[17] : {109 m >>n} {86 V >>W} 
+[18] : {110 n >>o} {87 W >>X} 
+[19] : {111 o >>p} {88 X >>Y} {65 A >>B} 
+[20] : {112 p >>q} {89 Y >>Z} {66 B >>C} 
+[21] : {113 q >>r} {90 Z >>a} {67 C >>D} 
+[22] : {114 r >>s} {68 D >>E} 
+HS>> load test-results/fails.tmp
+ERROR: could not open file 'test-results/fails.tmp'
+load failed
+HS>> structure
+elem_count: 52
+table_size: 23
+order_first: A
+order_last : z
+load_factor: 2.2609
+[ 0] : {115 s >>t} {69 E >>F} 
+[ 1] : {116 t >>u} {70 F >>G} 
+[ 2] : {117 u >>v} {71 G >>H} 
+[ 3] : {118 v >>w} {72 H >>I} 
+[ 4] : {119 w >>x} {73 I >>J} 
+[ 5] : {120 x >>y} {97 a >>b} {74 J >>K} 
+[ 6] : {121 y >>z} {98 b >>c} {75 K >>L} 
+[ 7] : {122 z >>NULL} {99 c >>d} {76 L >>M} 
+[ 8] : {100 d >>e} {77 M >>N} 
+[ 9] : {101 e >>f} {78 N >>O} 
+[10] : {102 f >>g} {79 O >>P} 
+[11] : {103 g >>h} {80 P >>Q} 
+[12] : {104 h >>i} {81 Q >>R} 
+[13] : {105 i >>j} {82 R >>S} 
+[14] : {106 j >>k} {83 S >>T} 
+[15] : {107 k >>l} {84 T >>U} 
+[16] : {108 l >>m} {85 U >>V} 
+[17] : {109 m >>n} {86 V >>W} 
+[18] : {110 n >>o} {87 W >>X} 
+[19] : {111 o >>p} {88 X >>Y} {65 A >>B} 
+[20] : {112 p >>q} {89 Y >>Z} {66 B >>C} 
+[21] : {113 q >>r} {90 Z >>a} {67 C >>D} 
+[22] : {114 r >>s} {68 D >>E} 
+HS>> print
+ 1 A
+ 2 B
+ 3 C
+ 4 D
+ 5 E
+ 6 F
+ 7 G
+ 8 H
+ 9 I
+ 10 J
+ 11 K
+ 12 L
+ 13 M
+ 14 N
+ 15 O
+ 16 P
+ 17 Q
+ 18 R
+ 19 S
+ 20 T
+ 21 U
+ 22 V
+ 23 W
+ 24 X
+ 25 Y
+ 26 Z
+ 27 a
+ 28 b
+ 29 c
+ 30 d
+ 31 e
+ 32 f
+ 33 g
+ 34 h
+ 35 i
+ 36 j
+ 37 k
+ 38 l
+ 39 m
+ 40 n
+ 41 o
+ 42 p
+ 43 q
+ 44 r
+ 45 s
+ 46 t
+ 47 u
+ 48 v
+ 49 w
+ 50 x
+ 51 y
+ 52 z
+HS>> load test-results/stress-hs.tmp
+HS>> structure
+elem_count: 10
+table_size: 23
+order_first: John
+order_last : Dirk
+load_factor: 0.4348
+[ 0] : 
+[ 1] : 
+[ 2] : {2122764 Dave >>Sollux} 
+[ 3] : {2314539 John >>Nepeta} 
+[ 4] : 
+[ 5] : {2130334 Dirk >>NULL} 
+[ 6] : {2125618951 Gamzee >>Terezi} 
+[ 7] : 
+[ 8] : 
+[ 9] : 
+[10] : 
+[11] : 
+[12] : {-1793345869 Terezi >>Jane} {-1812911969 Sollux >>Gamzee} 
+[13] : 
+[14] : 
+[15] : {2553199 Rose >>Dirk} {-1965180551 Nepeta >>Vriska} 
+[16] : 
+[17] : 
+[18] : 
+[19] : 
+[20] : {2301262 Jane >>Rose} 
+[21] : 
+[22] : {-1724336932 Vriska >>Dave} 
+HS>> print
+ 1 John
+ 2 Nepeta
+ 3 Vriska
+ 4 Dave
+ 5 Sollux
+ 6 Gamzee
+ 7 Terezi
+ 8 Jane
+ 9 Rose
+ 10 Dirk
+HS>> expand
+HS>> print
+ 1 John
+ 2 Nepeta
+ 3 Vriska
+ 4 Dave
+ 5 Sollux
+ 6 Gamzee
+ 7 Terezi
+ 8 Jane
+ 9 Rose
+ 10 Dirk
+HS>> structure
+elem_count: 10
+table_size: 47
+order_first: John
+order_last : Dirk
+load_factor: 0.2128
+[ 0] : 
+[ 1] : {2301262 Jane >>Rose} 
+[ 2] : 
+[ 3] : 
+[ 4] : {-1793345869 Terezi >>Jane} {-1812911969 Sollux >>Gamzee} 
+[ 5] : 
+[ 6] : {2125618951 Gamzee >>Terezi} 
+[ 7] : {-1965180551 Nepeta >>Vriska} 
+[ 8] : 
+[ 9] : {2122764 Dave >>Sollux} 
+[10] : 
+[11] : 
+[12] : {2130334 Dirk >>NULL} 
+[13] : 
+[14] : 
+[15] : 
+[16] : 
+[17] : 
+[18] : {2553199 Rose >>Dirk} 
+[19] : 
+[20] : 
+[21] : 
+[22] : 
+[23] : 
+[24] : {2314539 John >>Nepeta} 
+[25] : 
+[26] : 
+[27] : 
+[28] : 
+[29] : 
+[30] : 
+[31] : 
+[32] : 
+[33] : 
+[34] : 
+[35] : 
+[36] : 
+[37] : 
+[38] : 
+[39] : {-1724336932 Vriska >>Dave} 
+[40] : 
+[41] : 
+[42] : 
+[43] : 
+[44] : 
+[45] : 
+[46] : 
+HS>> add John
+Elem already present, no changes made
+HS>> add Davesprite
+HS>> add Aradia
+HS>> add Roxy
+HS>> add Jake
+HS>> add Tab
+HS>> print
+ 1 John
+ 2 Nepeta
+ 3 Vriska
+ 4 Dave
+ 5 Sollux
+ 6 Gamzee
+ 7 Terezi
+ 8 Jane
+ 9 Rose
+ 10 Dirk
+ 11 Davesprite
+ 12 Aradia
+ 13 Roxy
+ 14 Jake
+ 15 Tab
+HS>> structure
+elem_count: 15
+table_size: 47
+order_first: John
+order_last : Tab
+load_factor: 0.3191
+[ 0] : 
+[ 1] : {2301262 Jane >>Rose} 
+[ 2] : {2301169 Jake >>Tab} 
+[ 3] : 
+[ 4] : {-1793345869 Terezi >>Jane} {-1812911969 Sollux >>Gamzee} 
+[ 5] : {2553374 Roxy >>Jake} 
+[ 6] : {2125618951 Gamzee >>Terezi} 
+[ 7] : {-1965180551 Nepeta >>Vriska} 
+[ 8] : 
+[ 9] : {2122764 Dave >>Sollux} 
+[10] : 
+[11] : 
+[12] : {2130334 Dirk >>Davesprite} 
+[13] : 
+[14] : 
+[15] : 
+[16] : 
+[17] : 
+[18] : {2553199 Rose >>Dirk} 
+[19] : 
+[20] : 
+[21] : {-1666372143 Davesprite >>Aradia} 
+[22] : 
+[23] : 
+[24] : {2314539 John >>Nepeta} 
+[25] : 
+[26] : 
+[27] : 
+[28] : {83829 Tab >>NULL} 
+[29] : 
+[30] : 
+[31] : 
+[32] : 
+[33] : 
+[34] : 
+[35] : 
+[36] : 
+[37] : 
+[38] : 
+[39] : {-1724336932 Vriska >>Dave} 
+[40] : 
+[41] : 
+[42] : 
+[43] : {1969165388 Aradia >>Roxy} 
+[44] : 
+[45] : 
+[46] : 
+HS>> clear
+HS>> structure
+elem_count: 0
+table_size: 5
+order_first: NULL
+order_last : NULL
+load_factor: 0.0000
+[ 0] : 
+[ 1] : 
+[ 2] : 
+[ 3] : 
+[ 4] : 
+HS>> add Dave
+HS>> add Johnsprite
+HS>> contains Johnsprite
+FOUND: Johnsprite
+HS>> contains Davesprite
+NOT PRESENT
+HS>> load data/hs.hashset
+HS>> structure
+elem_count: 6
+table_size: 5
+order_first: John
+order_last : Dave
+load_factor: 1.2000
+[ 0] : {-2054697310 Karkat >>Dave} 
+[ 1] : {-1965180551 Nepeta >>Vriska} 
+[ 2] : {-1724336932 Vriska >>Sollux} 
+[ 3] : 
+[ 4] : {2122764 Dave >>NULL} {-1812911969 Sollux >>Karkat} {2314539 John >>Nepeta} 
+HS>> clear
+HS>> structure
+elem_count: 0
+table_size: 5
+order_first: NULL
+order_last : NULL
+load_factor: 0.0000
+[ 0] : 
+[ 1] : 
+[ 2] : 
+[ 3] : 
+[ 4] : 
+HS>> quit
