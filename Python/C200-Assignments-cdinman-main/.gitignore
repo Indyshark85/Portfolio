@@ -1,0 +1,16 @@
+# in this .gitignore file, list all filenames to be ignored,
+#    i.e. not to be ever pushed to the github repo,
+#    even if they exist locally:
+
+
+# macOS Finder custom attributes - not needed
+#   https://en.wikipedia.org/wiki/.DS_Store
+.DS_Store
+
+# Windows thumbnail cache - not needed
+#   https://en.wikipedia.org/wiki/Windows_thumbnail_cache
+Thumbs.db
+
+#Custom
+__pycache__/
+.vscode/
