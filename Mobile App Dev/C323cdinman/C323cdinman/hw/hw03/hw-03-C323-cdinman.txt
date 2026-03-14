@@ -1,0 +1,15 @@
+i. the parts of Homework 02 you have completed
+
+All parts have been accomplished
+
+
+ii. any interesting parts you may have added
+
+That you must manually connect each view to the tab bar
+
+iii. (optional) any question you may have about the tasks,
+and any issue you may have encountered with the software tools you used
+
+Naming conventions caused this to be super hard. The name changes required can cause this code to brick.
+
+All has been fixed and all code appears to work
