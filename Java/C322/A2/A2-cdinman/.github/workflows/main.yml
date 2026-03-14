@@ -1,0 +1,13 @@
+name: grader
+on:
+  push:
+    paths:
+      - '**/*.java'
+  workflow_dispatch: 
+
+jobs:
+  test:
+    runs-on: [self-hosted, Linux, X64]
+    timeout-minutes: 1
+    steps:
+    - uses: CSCI-C322-SP26/actions/a2@main

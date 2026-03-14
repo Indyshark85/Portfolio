@@ -1,0 +1,9 @@
+Test1 passed!
+
+Test2 passed!
+
+java ElectroHub screen regular_shipping overnight 10_tip. Test3 failed. Got:
+Total cost for Screen, Regular shipping, Overnight, 10% tip is $110.00.
+
+Test4 passed!
+
