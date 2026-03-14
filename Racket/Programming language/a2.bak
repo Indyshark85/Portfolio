@@ -1,0 +1,83 @@
+#lang racket
+(require rackunit)
+
+(struct rectangles
+  (from-center from-corners area contains? scale)
+  #:transparent)
+;1
+(define includes-edge?
+  (lambda (rectangle)
+    (match rectangle
+      [(rectangles from-center from-corners area contains? scale)
+       (let ([r (from-corners 0 0 2 2)])
+         (contains? r 0 1))])))
+
+;2
+(struct center (x y w h) #:transparent)
+
+(define center-rect-from-center
+  (lambda (cx cy w h)
+    (center cx cy w h)))
+
+(define center-rect-from-corners
+  (lambda (x1 y1 x2 y2)
+    (let
+        ([centerX (/(+ x1 x2) 2)]
+         [centerY (/(+ y1 y2) 2)]
+         [width (abs ( - x2 x1))]
+         [height (abs (- y2 y1))])
+      (center centerX centerY width height))))
+
+(define center-rect-area
+  (lambda (c)
+    (let
+        ([w (center-w c)]
+         [h (center-h c)])
+      (* w h))))
+
+(define center-rect-contains?
+  (lambda (c px py)
+    (let ([x (center-x c)]
+          [y (center-y c)]
+          [w (center-w c)]
+          [h (center-h c)])
+      (and (<= (- x (/ w 2)) px)
+           (<= px (+ x (/ w 2)))
+           (<= (- y (/ h 2)) py)
+           (<= py (+ y (/ h 2)))))))
+
+;tests (because this language is so dumb)
+(define r (center 1 1 2 2))
+(center-rect-contains? r 0 1) ; #t (edge)
+(center-rect-contains? r 3 3) ; #f
+
+(define corners-rect-scale
+  (lambda (k c)
+    (center ([center-x c]
+             [center-y c]
+             [* k (center-w c)]
+             [* k (center-h c)]))))
+
+(define center-rect
+  (rectangle center-rect-from-center
+              center-rect-from-corners
+              center-rect-area
+              center-rect-contains?
+              center-rect-scale))
+;3
+
+;4
+
+;5
+
+;6
+
+;7
+
+      
+    
+
+
+       
+
+

@@ -1,0 +1,138 @@
+
+h1 {
+  font-family: Goudy Stout}
+  
+h2 {
+  font-family: Goudy Stout}
+  
+#logo { 
+  text-align:center;
+  background-color:white;
+  font-size:20px;
+  }
+
+body{
+  background-color: gainsboro
+  }
+
+/*#FFAF60 */
+
+a {
+  text-decoration: none;
+  color:white;
+}
+  
+a.hover {
+  text-decoration: none
+}
+
+#address {
+  background-color: #ed3624;
+  color: yellow;
+  width: 300px;
+  float: left;
+  margin-right:10px;
+  margin-top: 10px;
+  border: 4px solid black;
+  padding: 10px ;
+  
+  }
+
+#special{
+  background-color: #ed3624;
+  color: yellow;
+  width: 300px;
+  float: right;
+  margin-right:10px;
+  margin-top: 10px;
+  border: 4px solid black;
+  padding: 10px;
+  text-align: center
+  }
+
+#CoffeeMP{
+   background-color: #ed3624;
+  color: yellow;
+  width: 300px;
+  float: right;
+  margin-right:10px;
+  margin-top: 10px;
+  border: 4px solid black;
+  padding: 10px;
+  text-align: center
+}
+
+#Delivery{
+    background-color: #ed3624;
+  color: yellow;
+  width: 300px;
+  float: right;
+  margin-right:10px;
+  margin-top: 10px;
+  border: 4px solid black;
+  padding: 10px;
+  text-align: center
+}
+
+#MPR{
+    background-color: #ed3624;
+  color: yellow;
+  width: 300px;
+  float: right;
+  margin-right:10px;
+  margin-top: 10px;
+  border: 4px solid black;
+  padding: 10px;
+  text-align: center
+}
+
+#social{
+    background-color: #ed3624;
+  color: yellow;
+  width: 300px;
+  float: right;
+  margin-right:10px;
+  margin-top: 10px;
+  border: 4px solid black;
+  padding: 10px;
+  text-align: center
+}
+
+#hours{
+background-color: #ed3624;
+  color: yellow;
+  width: 300px;
+  float: left;
+  margin-right:10px;
+  margin-top: 10px;
+  border: 4px solid black;
+  padding: 10px ;
+  
+
+}
+
+#chicken{
+ background-color: #ed3624;
+  color: yellow;
+  width: 300px;
+  float: left;
+  margin-right:10px;
+  margin-top: 10px;
+  border: 4px solid black;
+  padding: 10px ;
+   
+}
+
+#history{
+  font-size:30px;
+   background-color: #f85748;
+  color:yellow;
+  width: 1000px;
+  margin-right:10px;
+  margin-top: 10px;
+  border: 4px solid black;
+  padding: 10px ;
+  text-align:center;
+  margin-left:24%;
+  
+}

@@ -1,0 +1,35 @@
+#lang racket
+;1
+(struct ifte (bool true false) #:transparent)
+(struct app (rator rand) #:transparent)
+(struct lam (param body) #:transparent)
+;3
+(struct assign (lhs rhs) #:transparent)
+;4
+(struct hole () #:transparent)
+;11
+(struct couple (left right) #:transparent)
+
+;---------------------------------------------------
+;     Part 1: Programming More with Mutation
+;---------------------------------------------------
+;1
+;2
+;3
+;---------------------------------------------------
+;       Part 2: Distinguishing Expressions
+;---------------------------------------------------
+;4
+;5
+;6
+;7
+;----------------------------------------------------
+;Part 3: Distinguishing Parameter-Passing Variations
+;----------------------------------------------------
+;8
+;----------------------------------------------------
+;                     Brainteasers
+;----------------------------------------------------
+;9
+;10
+;11

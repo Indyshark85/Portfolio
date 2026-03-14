@@ -1,0 +1,64 @@
+#lang racket
+
+
+(struct lam (param body) #:transparent)
+(struct app (rator rand) #:transparent)
+(struct local (lhs rhs body) #:transparent)
+(struct ifte (bool true false) #:transparent)
+
+
+;==========================================;
+;Part 1: Two Ways to Represent Environments;
+;==========================================;
+
+;1
+
+(struct environments
+  (empty-env extend-env apply-env)
+  #:transparent)
+
+; fn-empty-env : -> [String -> Value]
+(define fn-empty-env
+  (lambda()
+    (lambda(name))))
+ 
+; fn-extend-env : String Value [String -> Value] -> [String -> Value]
+(define fn-extend-env
+  (lambda(name val env)
+    (lambda (q)
+      (if (string=? q name)
+          val
+          (env q)))))
+ 
+; fn-apply-env : [String -> Value] String -> Value
+(define fn-apply-env
+  (lambda (env name)
+    (env name)))
+ 
+; fn-environments : [Environments [String -> Value]]
+(define fn-environments
+  (environments fn-empty-env
+                fn-extend-env
+                fn-apply-env))
+
+;2
+
+;3
+
+;4
+
+;==========================================;
+;Part 2: Two Ways to Represent Closures    ;
+;==========================================;
+
+
+;5
+
+;6
+
+
+;7
+
+;8
+
+;9
