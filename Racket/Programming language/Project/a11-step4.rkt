@@ -1,0 +1,354 @@
+#lang racket
+(require rackunit)
+(require "parenthec.rkt")
+
+; Step 4: Replace closure-lam struct with define-union clos
+;   - Remove (struct closure-lam ...)
+;   - Add (define-union clos (lam body env))
+;   - Change apply-closure to use union-case instead of match
+;   - Replace (closure-lam body env) constructor calls with (clos_lam body env)
+
+;============================================================
+; Global Registers
+;============================================================
+(define-registers *e* *env* *k* *v* *y*
+                  *clos* *a*
+                  *r^* *env^* *k^*
+                  *lv^* *f^* *rand^* *body^*
+                  *conseq^* *alt^* *result^* *k2^*)
+
+;============================================================
+; Expression Language
+;============================================================
+(define-union expr
+  (const value)
+  (dBvar index)
+  (mult l r)
+  (decr r)
+  (zerop r)
+  (dBlam body)
+  (app rator rand)
+  (dBlocal rhs body)
+  (ifte test conseq alt)
+  (dBcatch body)
+  (throw continuation result))
+
+;============================================================
+; Closure — now a define-union (Step 4)
+;============================================================
+(define-union clos
+  (lam body env))
+
+;============================================================
+; Environment Structs
+;============================================================
+(struct empty-env () #:transparent)
+(struct extend-env (a^ env^) #:transparent)
+
+;============================================================
+; Continuation Structs
+;============================================================
+(struct k-empty () #:transparent)
+(struct k-mult-left (r^ env^ k^) #:transparent)
+(struct k-mult-right (lv^ k^) #:transparent)
+(struct k-decr (k^) #:transparent)
+(struct k-zerop (k^) #:transparent)
+(struct k-ifte (conseq^ alt^ env^ k^) #:transparent)
+(struct k-app-rator (rand^ env^ k^) #:transparent)
+(struct k-app-rand (f^ k^) #:transparent)
+(struct k-local (body^ env^ k^) #:transparent)
+(struct k-throw (result^ env^) #:transparent)
+(struct k-throw-result (k2^) #:transparent)
+
+;============================================================
+; Continuation Constructor Helpers
+;============================================================
+(define (mult-left-k)  (k-mult-left *r^* *env^* *k^*))
+(define (mult-right-k) (k-mult-right *lv^* *k^*))
+(define (decr-k)       (k-decr *k^*))
+(define (zerop-k)      (k-zerop *k^*))
+(define (ifte-k)       (k-ifte *conseq^* *alt^* *env^* *k^*))
+(define (app-rator-k)  (k-app-rator *rand^* *env^* *k^*))
+(define (app-rand-k)   (k-app-rand *f^* *k^*))
+(define (local-k)      (k-local *body^* *env^* *k^*))
+(define (throw-k)      (k-throw *result^* *env^*))
+(define (throw-result-k) (k-throw-result *k2^*))
+
+;============================================================
+; apply-env
+;============================================================
+(define (apply-env)
+  (match *env*
+    [(empty-env)
+     (error 'value-of "unbound variable")]
+    [(extend-env a^ env^)
+     (if (zero? *y*)
+         (begin
+           (set! *v* a^)
+           (apply-k))
+         (begin
+           (set! *env* env^)
+           (set! *y*   (sub1 *y*))
+           (apply-env)))]))
+
+;============================================================
+; apply-closure — now uses union-case on clos (Step 4)
+;============================================================
+(define (apply-closure)
+  (union-case *clos* clos
+    ((lam body env)
+     (begin
+       (set! *e*   body)
+       (set! *env* (extend-env *a* env))
+       (value-of-cps)))))
+
+;============================================================
+; apply-k
+;============================================================
+(define (apply-k)
+  (match *k*
+    [(k-empty)
+     *v*]
+    [(k-mult-left r^ env^ k2^)
+     (begin
+       (set! *lv^* *v*)
+       (set! *k^*  k2^)
+       (set! *k*   (mult-right-k))
+       (set! *e*   r^)
+       (set! *env* env^)
+       (value-of-cps))]
+    [(k-mult-right lv^ k2^)
+     (begin
+       (set! *v* (* lv^ *v*))
+       (set! *k* k2^)
+       (apply-k))]
+    [(k-decr k2^)
+     (begin
+       (set! *v* (sub1 *v*))
+       (set! *k* k2^)
+       (apply-k))]
+    [(k-zerop k2^)
+     (begin
+       (set! *v* (zero? *v*))
+       (set! *k* k2^)
+       (apply-k))]
+    [(k-ifte conseq^ alt^ env^ k2^)
+     (if *v*
+         (begin
+           (set! *e*   conseq^)
+           (set! *env* env^)
+           (set! *k*   k2^)
+           (value-of-cps))
+         (begin
+           (set! *e*   alt^)
+           (set! *env* env^)
+           (set! *k*   k2^)
+           (value-of-cps)))]
+    [(k-app-rator rand^ env^ k2^)
+     (begin
+       (set! *f^*  *v*)
+       (set! *k^*  k2^)
+       (set! *k*   (app-rand-k))
+       (set! *e*   rand^)
+       (set! *env* env^)
+       (value-of-cps))]
+    [(k-app-rand f^ k2^)
+     (begin
+       (set! *clos* f^)
+       (set! *a*    *v*)
+       (set! *k*    k2^)
+       (apply-closure))]
+    [(k-local body^ env^ k2^)
+     (begin
+       (set! *e*   body^)
+       (set! *env* (extend-env *v* env^))
+       (set! *k*   k2^)
+       (value-of-cps))]
+    [(k-throw result^ env^)
+     (begin
+       (set! *e*   result^)
+       (set! *env* env^)
+       (set! *k*   *v*)
+       (value-of-cps))]
+    [(k-throw-result k2^)
+     (begin
+       (set! *k* k2^)
+       (apply-k))]))
+
+;============================================================
+; value-of-cps — uses clos_lam constructor instead of closure-lam
+;============================================================
+(define (value-of-cps)
+  (union-case *e* expr
+    ((const v)
+     (begin (set! *v* v) (apply-k)))
+    ((dBvar y)
+     (begin (set! *y* y) (apply-env)))
+    ((mult l r)
+     (begin
+       (set! *r^*  r)
+       (set! *env^* *env*)
+       (set! *k^*  *k*)
+       (set! *k*   (mult-left-k))
+       (set! *e*   l)
+       (value-of-cps)))
+    ((decr r)
+     (begin
+       (set! *k^* *k*)
+       (set! *k*  (decr-k))
+       (set! *e*  r)
+       (value-of-cps)))
+    ((zerop r)
+     (begin
+       (set! *k^* *k*)
+       (set! *k*  (zerop-k))
+       (set! *e*  r)
+       (value-of-cps)))
+    ((dBlam body)
+     ; Use clos_lam instead of closure-lam (Step 4)
+     (begin
+       (set! *v* (clos_lam body *env*))
+       (apply-k)))
+    ((app rator rand)
+     (begin
+       (set! *rand^* rand)
+       (set! *env^*  *env*)
+       (set! *k^*    *k*)
+       (set! *k*     (app-rator-k))
+       (set! *e*     rator)
+       (value-of-cps)))
+    ((dBlocal rhs body)
+     (begin
+       (set! *body^* body)
+       (set! *env^*  *env*)
+       (set! *k^*    *k*)
+       (set! *k*     (local-k))
+       (set! *e*     rhs)
+       (value-of-cps)))
+    ((ifte test conseq alt)
+     (begin
+       (set! *conseq^* conseq)
+       (set! *alt^*    alt)
+       (set! *env^*    *env*)
+       (set! *k^*      *k*)
+       (set! *k*       (ifte-k))
+       (set! *e*       test)
+       (value-of-cps)))
+    ((dBcatch body)
+     (begin
+       (set! *e*   body)
+       (set! *env* (extend-env *k* *env*))
+       (value-of-cps)))
+    ((throw continuation result)
+     (begin
+       (set! *result^* result)
+       (set! *env^*    *env*)
+       (set! *k*       (throw-k))
+       (set! *e*       continuation)
+       (value-of-cps)))))
+
+;============================================================
+; Top-level helpers
+;============================================================
+(define (empty-k) (k-empty))
+
+(define (run-cps expr)
+  (set! *e*   expr)
+  (set! *env* (empty-env))
+  (set! *k*   (empty-k))
+  (value-of-cps))
+
+;============================================================
+; main
+;============================================================
+(define main
+  (lambda ()
+    (set! *e*
+     (expr_dBlocal
+      (expr_dBlam
+       (expr_dBlam
+        (expr_ifte
+         (expr_zerop (expr_dBvar 0))
+         (expr_const 1)
+         (expr_mult
+          (expr_dBvar 0)
+          (expr_app
+           (expr_app (expr_dBvar 1) (expr_dBvar 1))
+           (expr_decr (expr_dBvar 0)))))))
+      (expr_mult
+       (expr_dBcatch
+        (expr_app
+         (expr_app (expr_dBvar 1) (expr_dBvar 1))
+         (expr_throw
+          (expr_dBvar 0)
+          (expr_app
+           (expr_app (expr_dBvar 1) (expr_dBvar 1))
+           (expr_const 4)))))
+       (expr_const 5))))
+    (set! *env* (empty-env))
+    (set! *k*   (empty-k))
+    (value-of-cps)))
+
+;============================================================
+; Tests
+;============================================================
+(check-equal? (run-cps (expr_const 5)) 5)
+(check-equal? (run-cps (expr_mult (expr_const 5) (expr_const 5))) 25)
+(check-equal? (run-cps (expr_decr (expr_decr (expr_const 5)))) 3)
+(check-equal?
+ (run-cps (expr_ifte (expr_zerop (expr_const 0)) (expr_mult (expr_const 2) (expr_const 2)) (expr_const 3)))
+ 4)
+(check-equal?
+ (run-cps (expr_app (expr_app (expr_dBlam (expr_dBlam (expr_dBvar 1))) (expr_const 6)) (expr_const 5)))
+ 6)
+(check-equal? (run-cps (expr_dBlocal (expr_const 5) (expr_dBvar 0))) 5)
+(check-equal? (run-cps (expr_dBlocal (expr_const 6) (expr_const 4))) 4)
+(check-equal? (run-cps (expr_mult (expr_const 5) (expr_dBlocal (expr_const 5) (expr_dBvar 0)))) 25)
+(check-equal?
+ (run-cps (expr_app (expr_ifte (expr_zerop (expr_const 4)) (expr_dBlam (expr_dBvar 0)) (expr_dBlam (expr_const 5))) (expr_const 3)))
+ 5)
+(check-equal?
+ (run-cps (expr_app (expr_ifte (expr_zerop (expr_const 0)) (expr_dBlam (expr_dBvar 0)) (expr_dBlam (expr_const 5))) (expr_const 3)))
+ 3)
+(check-equal?
+ (run-cps (expr_dBcatch (expr_throw (expr_throw (expr_dBvar 0) (expr_const 5)) (expr_const 6))))
+ 5)
+(check-equal?
+ (run-cps (expr_dBcatch (expr_throw (expr_const 6) (expr_throw (expr_dBvar 0) (expr_const 5)))))
+ 5)
+(check-equal?
+ (run-cps (expr_mult (expr_const 3) (expr_dBcatch (expr_throw (expr_const 5) (expr_throw (expr_dBvar 0) (expr_const 5))))))
+ 15)
+(check-equal?
+ (run-cps (expr_ifte (expr_zerop (expr_const 5))
+                     (expr_app (expr_dBlam (expr_app (expr_dBvar 0) (expr_dBvar 0)))
+                               (expr_dBlam (expr_app (expr_dBvar 0) (expr_dBvar 0))))
+                     (expr_const 4)))
+ 4)
+(check-equal?
+ (run-cps (expr_ifte (expr_zerop (expr_const 0))
+                     (expr_const 4)
+                     (expr_app (expr_dBlam (expr_app (expr_dBvar 0) (expr_dBvar 0)))
+                               (expr_dBlam (expr_app (expr_dBvar 0) (expr_dBvar 0))))))
+ 4)
+(check-equal?
+ (run-cps
+  (expr_app (expr_dBlam (expr_app (expr_app (expr_dBvar 0) (expr_dBvar 0)) (expr_const 2)))
+            (expr_dBlam (expr_dBlam (expr_ifte (expr_zerop (expr_dBvar 0))
+                                               (expr_const 1)
+                                               (expr_app (expr_app (expr_dBvar 1) (expr_dBvar 1))
+                                                         (expr_decr (expr_dBvar 0))))))))
+ 1)
+(check-equal?
+ (run-cps
+  (expr_dBcatch
+   (expr_throw
+    (expr_dBcatch
+     (expr_mult (expr_const 10)
+                (expr_throw (expr_dBvar 1)
+                            (expr_mult (expr_dBcatch (expr_throw (expr_dBvar 1) (expr_dBvar 0)))
+                                       (expr_dBcatch (expr_throw (expr_dBvar 1) (expr_dBvar 0)))))))
+    (expr_const 3))))
+ 9)
+
+(check-equal? (main) 120)

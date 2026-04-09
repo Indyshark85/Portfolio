@@ -1,0 +1,268 @@
+#lang racket
+(require rackunit)
+
+;step 10
+
+;the great wall of structs unchanged from A9 - step 1
+(struct const (value) #:transparent)
+(struct dBvar (index) #:transparent)
+(struct mult (l r) #:transparent)
+(struct decr (r) #:transparent)
+(struct zerop (r) #:transparent)
+(struct dBlam (body) #:transparent)
+(struct app (rator rand) #:transparent)
+(struct dBlocal (rhs body) #:transparent)
+(struct ifte (test conseq alt) #:transparent)
+(struct dBcatch (body) #:transparent)
+(struct throw (continuation result) #:transparent)
+
+;step 10
+;continuation structs
+(struct k-empty () #:transparent)
+(struct k-mult-left (r^ env^ k^) #:transparent)
+(struct k-mult-right (lv^ k^) #:transparent)
+(struct k-decr (k^) #:transparent)
+(struct k-zerop (k^) #:transparent)
+(struct k-ifte (conseq^ alt^ env^ k^) #:transparent)
+(struct k-app-rator (rand^ env^ k^) #:transparent)
+(struct k-app-rand (f^ k^) #:transparent)
+(struct k-local (body^ env^ k^) #:transparent)
+(struct k-throw (result^ env^) #:transparent)
+(struct k-throw-result (k2^) #:transparent)
+
+;=========================================================
+;               Step 1: Add apply functions
+;=========================================================
+;; (define (apply-env env y k)
+;;   (env y k))
+
+;apply env changed in step 4
+(define (apply-env env y k)
+  (match env
+    [(empty-env)
+     (error 'value-of "unbound variable")]
+    
+    [(extend-env a^ env^)
+     (if (zero? y)
+         (apply-k k a^)
+         (apply-env env^ (sub1 y) k))]))
+;updated in step 7 bc clos is no longer a function and is a struct now
+(define (apply-closure clos a k)
+  (match clos
+    [(closure-lam body env)
+     (value-of-cps body
+                   (extend-env a env)
+                   k)]))
+;completely rewritten step 10
+;gave me a ton of grief
+(define (apply-k k v)
+  (match k
+    [(k-empty) v] ; final numeric value returned
+    [(k-mult-left r^ env^ k2^) (value-of-cps r^ env^ (mult-right-k v k2^))]
+    [(k-mult-right lv^ k2^) (apply-k k2^ (* lv^ v))]
+    [(k-decr k2^) (apply-k k2^ (sub1 v))]
+    [(k-zerop k2^) (apply-k k2^ (zero? v))]
+    [(k-ifte conseq^ alt^ env^ k2^) (if v (value-of-cps conseq^ env^ k2^) (value-of-cps alt^ env^ k2^))]
+    [(k-app-rator rand^ env^ k2^) (value-of-cps rand^ env^ (app-rand-k v k2^))]
+    [(k-app-rand f^ k2^) (apply-closure f^ v k2^)]
+    [(k-local body^ env^ k2^) (value-of-cps body^ (extend-env v env^) k2^)]
+    [(k-throw result^ env^)
+     (value-of-cps result^ env^ v)]  ;v IS the continuation to invoke
+
+    [(k-throw-result k2^) 
+     ;resume the continuation after a throw
+     (apply-k k2^ v)]
+
+    ))
+
+;Step 7: closure helper but now a struct
+(struct closure-lam (body env) #:transparent)
+
+;==========================================================
+;Step 3: Add ^ to formals of extend-env (outer parameters only)
+;==========================================================
+
+(struct extend-env (a^ env^) #:transparent)
+
+;=================================================
+; continuation helpers - step 9 (alpha conversion)
+;=================================================
+;Step 10: Continuation helpers
+(define (mult-left-k r^ env^ k^) (k-mult-left r^ env^ k^))
+(define (mult-right-k lv^ k^) (k-mult-right lv^ k^))
+(define (decr-k k^) (k-decr k^))
+(define (zerop-k k^) (k-zerop k^))
+(define (ifte-k conseq^ alt^ env^ k^) (k-ifte conseq^ alt^ env^ k^))
+(define (app-rator-k rand^ env^ k^) (k-app-rator rand^ env^ k^))
+(define (app-rand-k f^ k^) (k-app-rand f^ k^))
+(define (local-k body^ env^ k^) (k-local body^ env^ k^))
+(define (throw-k result^ env^) (k-throw result^ env^))
+(define (throw-result-k k2^) (k-throw-result k2^))
+
+
+
+;modified value of cps from A9 - modified step 8
+(define value-of-cps
+  (lambda (e env k)
+    (match e
+      [(const v)
+       (apply-k k v)]
+
+      [(mult l r)
+       (value-of-cps l env
+                     (mult-left-k r env k))]
+
+      [(decr r)
+       (value-of-cps r env
+                     (decr-k k))]
+
+      [(zerop r)
+       (value-of-cps r env
+                     (zerop-k k))]
+
+      [(ifte test conseq alt)
+       (value-of-cps test env
+                     (ifte-k conseq alt env k))]
+
+      [(dBvar y)
+       (apply-env env y k)]
+
+      ;Step 6 change: lambdas now produce closure structs
+      [(dBlam body)
+       (apply-k k
+                (closure-lam body env))]
+
+      [(app rator rand)
+       (value-of-cps rator env
+                     (app-rator-k rand env k))]
+
+      [(dBlocal rhs body)
+       (value-of-cps rhs env
+                     (local-k body env k))]
+
+      [(throw continuation result)
+       ;evaluate the continuation to get the handler (a function) 
+       ;then throw the result into it
+       (value-of-cps continuation env
+                     (throw-k result env))]
+
+      [(dBcatch body)
+       ;capture the current continuation as a 'catch' handler
+       (value-of-cps body
+                     env
+                     (throw-result-k k))]
+      )))
+
+;empty-env from A9 changed step 4
+;kept to show flow
+;; (define empty-env
+;;   (lambda ()
+;;     (lambda (y)
+;;       (error 'value-of "unbound variable"))))
+
+(struct empty-env () #:transparent)
+
+;empty-k changed step 10
+(define empty-k (k-empty))
+
+; Helper to run CPS with k-empty
+(define (run-cps expr)
+  (value-of-cps expr (empty-env) empty-k))
+
+;=================================================
+; Rewritten Tests
+;=================================================
+
+;=================================================
+; Tests
+;=================================================
+
+(check-equal? (run-cps (const 5)) 5)
+(check-equal? (run-cps (mult (const 5) (const 5))) 25)
+(check-equal? (run-cps (decr (decr (const 5)))) 3)
+
+(check-equal?
+ (run-cps (ifte (zerop (const 0)) (mult (const 2) (const 2)) (const 3)))
+ 4)
+
+(check-equal?
+ (run-cps (app (app (dBlam (dBlam (dBvar 1))) (const 6)) (const 5)))
+ 6)
+
+(check-equal? (run-cps (dBlocal (const 5) (dBvar 0))) 5)
+(check-equal? (run-cps (dBlocal (const 6) (const 4))) 4)
+(check-equal? (run-cps (mult (const 5) (dBlocal (const 5) (dBvar 0)))) 25)
+
+(check-equal?
+ (run-cps (app (ifte (zerop (const 4)) (dBlam (dBvar 0)) (dBlam (const 5))) (const 3)))
+ 5)
+
+(check-equal?
+ (run-cps (app (ifte (zerop (const 0)) (dBlam (dBvar 0)) (dBlam (const 5))) (const 3)))
+ 3)
+
+(check-equal?
+ (run-cps (dBcatch (throw (throw (dBvar 0) (const 5)) (const 6))))
+ 5)
+
+(check-equal?
+ (run-cps (dBcatch (throw (const 6) (throw (dBvar 0) (const 5)))))
+ 5)
+
+(check-equal?
+ (run-cps (mult (const 3) (dBcatch (throw (const 5) (throw (dBvar 0) (const 5))))))
+ 15)
+
+(check-equal?
+ (run-cps (ifte (zerop (const 5))
+               (app (dBlam (app (dBvar 0) (dBvar 0)))
+                    (dBlam (app (dBvar 0) (dBvar 0))))
+               (const 4)))
+ 4)
+
+(check-equal?
+ (run-cps (ifte (zerop (const 0))
+               (const 4)
+               (app (dBlam (app (dBvar 0) (dBvar 0)))
+                    (dBlam (app (dBvar 0) (dBvar 0))))))
+ 4)
+
+(check-equal?
+ (run-cps
+  (app (dBlam (app (app (dBvar 0) (dBvar 0)) (const 2)))
+       (dBlam (dBlam (ifte (zerop (dBvar 0))
+                           (const 1)
+                           (app (app (dBvar 1) (dBvar 1))
+                                (decr (dBvar 0))))))))
+ 1)
+
+(check-equal?
+ (run-cps
+  (dBcatch
+   (throw
+    (dBcatch
+     (mult (const 10)
+           (throw (dBvar 1)
+                  (mult (dBcatch (throw (dBvar 1) (dBvar 0)))
+                        (dBcatch (throw (dBvar 1) (dBvar 0)))))))
+    (const 3))))
+ 9)
+
+;=================================================
+; Step 5: Remove fallback case in apply-env (if present)
+;=================================================
+;No fallback case was used, so no changes needed.
+
+;whats left
+
+;=================================================
+;       Defunctionalizing Continuations
+;=================================================
+
+
+
+
+
+
+;step 11
+

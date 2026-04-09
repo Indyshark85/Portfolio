@@ -1,0 +1,240 @@
+;#lang racket
+;(require "parenthec.rkt")
+
+;============================================================
+; Program Counter
+;============================================================
+(define-program-counter pc)
+
+;============================================================
+; Global Registers
+;============================================================
+(define-registers *e* *env* *k* *v* *y*
+  *clos* *a*
+  *r^* *env^* *k^*
+  *lv^* *f^* *rand^* *body^*
+  *conseq^* *alt^* *result^* *k2^*)
+
+;============================================================
+; Expression Language
+;============================================================
+(define-union expr
+  (const value)
+  (dBvar index)
+  (mult l r)
+  (decr r)
+  (zerop r)
+  (dBlam body)
+  (app rator rand)
+  (dBlocal rhs body)
+  (ifte test conseq alt)
+  (dBcatch body)
+  (throw continuation result))
+
+;============================================================
+; Closure
+;============================================================
+(define-union clos
+  (lam body env))
+
+;============================================================
+; Environment
+;============================================================
+(define-union envr
+  (empty)
+  (extend a^ env^))
+
+;============================================================
+; Continuations
+;============================================================
+(define-union kt
+  (empty dismount)
+  (mult-left r^ env^ k^)
+  (mult-right lv^ k^)
+  (decr k^)
+  (zerop k^)
+  (ifte conseq^ alt^ env^ k^)
+  (app-rator rand^ env^ k^)
+  (app-rand f^ k^)
+  (local body^ env^ k^)
+  (throw result^ env^)
+  (throw-result k2^))
+
+;============================================================
+; apply-env
+;============================================================
+(define-label apply-env
+  (union-case *env* envr
+    ((empty)
+      (error 'value-of "unbound variable"))
+    ((extend a^ env^)
+      (if (zero? *y*)
+          (begin
+            (set! *v* a^)
+            (set! pc apply-k))
+          (begin
+            (set! *env* env^)
+            (set! *y* (sub1 *y*))
+            (set! pc apply-env))))))
+
+;============================================================
+; apply-closure
+;============================================================
+(define-label apply-closure
+  (union-case *clos* clos
+    ((lam body env)
+      (begin
+        (set! *e* body)
+        (set! *env* (envr_extend *a* env))
+        (set! pc value-of-cps)))))
+
+;============================================================
+; apply-k
+;============================================================
+(define-label apply-k
+  (union-case *k* kt
+
+    ((empty dismount)
+      (dismount-trampoline dismount))
+
+    ((mult-left r^ env^ k2^)
+      (begin
+        (set! *lv^* *v*)
+        (set! *k* (kt_mult-right *lv^* k2^))
+        (set! *e* r^)
+        (set! *env* env^)
+        (set! pc value-of-cps)))
+
+    ((mult-right lv^ k2^)
+      (begin
+        (set! *v* (* lv^ *v*))
+        (set! *k* k2^)
+        (set! pc apply-k)))
+
+    ((decr k2^)
+      (begin
+        (set! *v* (sub1 *v*))
+        (set! *k* k2^)
+        (set! pc apply-k)))
+
+    ((zerop k2^)
+      (begin
+        (set! *v* (zero? *v*))
+        (set! *k* k2^)
+        (set! pc apply-k)))
+
+    ((ifte conseq^ alt^ env^ k2^)
+      (if *v*
+          (begin
+            (set! *e* conseq^)
+            (set! *env* env^)
+            (set! *k* k2^)
+            (set! pc value-of-cps))
+          (begin
+            (set! *e* alt^)
+            (set! *env* env^)
+            (set! *k* k2^)
+            (set! pc value-of-cps))))
+
+    ((app-rator rand^ env^ k2^)
+      (begin
+        (set! *f^* *v*)
+        (set! *k* (kt_app-rand *f^* k2^))
+        (set! *e* rand^)
+        (set! *env* env^)
+        (set! pc value-of-cps)))
+
+    ((app-rand f^ k2^)
+      (begin
+        (set! *clos* f^)
+        (set! *a* *v*)
+        (set! *k* k2^)
+        (set! pc apply-closure)))
+
+    ((local body^ env^ k2^)
+      (begin
+        (set! *e* body^)
+        (set! *env* (envr_extend *v* env^))
+        (set! *k* k2^)
+        (set! pc value-of-cps)))
+
+    ((throw result^ env^)
+      (begin
+        (set! *e* result^)
+        (set! *env* env^)
+        (set! *k* *v*)
+        (set! pc value-of-cps)))
+
+    ((throw-result k2^)
+      (begin
+        (set! *k* k2^)
+        (set! pc apply-k)))))
+
+;============================================================
+; value-of-cps
+;============================================================
+(define-label value-of-cps
+  (union-case *e* expr
+
+    ((const v)
+      (begin
+        (set! *v* v)
+        (set! pc apply-k)))
+
+    ((dBvar y)
+      (begin
+        (set! *y* y)
+        (set! pc apply-env)))
+
+    ((mult l r)
+      (begin
+        (set! *k* (kt_mult-left r *env* *k*))
+        (set! *e* l)
+        (set! pc value-of-cps)))
+
+    ((decr r)
+      (begin
+        (set! *k* (kt_decr *k*))
+        (set! *e* r)
+        (set! pc value-of-cps)))
+
+    ((zerop r)
+      (begin
+        (set! *k* (kt_zerop *k*))
+        (set! *e* r)
+        (set! pc value-of-cps)))
+
+    ((dBlam body)
+      (begin
+        (set! *v* (clos_lam body *env*))
+        (set! pc apply-k)))
+
+    ((app rator rand)
+      (begin
+        (set! *k* (kt_app-rator rand *env* *k*))
+        (set! *e* rator)
+        (set! pc value-of-cps)))
+
+    ((dBlocal rhs body)
+      (begin
+        (set! *k* (kt_local body *env* *k*))
+        (set! *e* rhs)
+        (set! pc value-of-cps)))
+
+    ((ifte test conseq alt)
+      (begin
+        (set! *k* (kt_ifte conseq alt *env* *k*))
+        (set! *e* test)
+        (set! pc value-of-cps)))
+
+    ((dBcatch body)
+      (begin
+        (set! *env* (envr_extend *k* *env*))
+        (set! *e* body)
+        (set! pc value-of-cps)))
+
+    ((throw continuation result)
+      (begin
+        (set! *k* (kt_throw result *env*))
+        (set! *e* continuation)
+        (set! pc value-of-cps)))))
