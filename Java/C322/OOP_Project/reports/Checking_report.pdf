@@ -1,0 +1,78 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R
+   /MediaBox [0 0 595 842]
+   /Contents 5 0 R
+   /Resources << /Font << /F1 3 0 R >> >>
+>>
+endobj
+5 0 obj
+<< /Length 905 >>
+stream
+BT
+/F1 16 Tf
+50 800 Td
+(MyBudget -- Account Report) Tj
+/F1 11 Tf
+0 -24 Td
+(Generated: 2026-04-23 21:13) Tj
+0 -20 Td
+(------------------------------------------------) Tj
+0 -20 Td
+(Account      : Checking) Tj
+0 -18 Td
+(Balance      : $2720.00) Tj
+0 -18 Td
+(Budget Limit : $5000.00) Tj
+0 -18 Td
+(Balance % of Limit: 54.4%) Tj
+0 -20 Td
+(------------------------------------------------) Tj
+/F1 13 Tf
+0 -20 Td
+(Transaction History) Tj
+/F1 10 Tf
+0 -15 Td
+(  [04-23 21:12] DEPOSIT: $2500.00) Tj
+0 -15 Td
+(  [04-23 21:12] WITHDRAWAL: $850.00) Tj
+0 -15 Td
+(  [04-23 21:12] WITHDRAWAL: $120.00) Tj
+0 -15 Td
+(  [04-23 21:12] WITHDRAWAL: $65.00) Tj
+0 -15 Td
+(  [04-23 21:12] DEPOSIT: $2500.00) Tj
+0 -15 Td
+(  [04-23 21:12] WITHDRAWAL: $200.00) Tj
+0 -15 Td
+(  [04-23 21:12] WITHDRAWAL: $45.00) Tj
+0 -15 Td
+(  [04-23 21:12] WITHDRAWAL: $4200.00) Tj
+0 -20 Td
+(------------------------------------------------) Tj
+ET
+
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000183 00000 n 
+0000000318 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1274
+%%EOF
