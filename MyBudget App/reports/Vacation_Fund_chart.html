@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<title>MyBudget - Vacation Fund Report</title>
+<script src='https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js'></script>
+<style>
+  body{font-family:'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;margin:0;padding:24px;}
+  h1{color:#38bdf8;margin-bottom:4px;} .sub{color:#94a3b8;font-size:13px;margin-bottom:24px;}
+  .cards{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .card{background:#1e293b;border-radius:12px;padding:20px 28px;min-width:160px;}
+  .card .label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#64748b;margin-bottom:6px;}
+  .card .val{font-size:26px;font-weight:700;}
+  .green{color:#4ade80;} .red{color:#f87171;} .blue{color:#38bdf8;} .yellow{color:#fbbf24;}
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .chart-box{background:#1e293b;border-radius:12px;padding:20px;}
+  .chart-box h2{font-size:14px;color:#94a3b8;margin:0 0 16px;}
+  @media(max-width:640px){.charts{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<h1>MyBudget — Vacation Fund Account</h1>
+<p class='sub'>Generated: 2026-04-24 13:29</p>
+<div class='cards'>
+  <div class='card'><div class='label'>Balance</div><div class='val blue'>$70.00</div></div>
+  <div class='card'><div class='label'>Budget Limit</div><div class='val yellow'>$2000.00</div></div>
+  <div class='card'><div class='label'>% of Limit</div><div class='val red'>3.5%</div></div>
+  <div class='card'><div class='label'>Total Deposited</div><div class='val green'>$300.00</div></div>
+  <div class='card'><div class='label'>Total Withdrawn</div><div class='val red'>$650.00</div></div>
+</div>
+<div class='charts'>
+  <div class='chart-box'><h2>Transaction Breakdown</h2><canvas id='barChart'></canvas></div>
+  <div class='chart-box'><h2>Deposits vs Withdrawals</h2><canvas id='pieChart'></canvas></div>
+</div>
+<script>
+const barCtx = document.getElementById('barChart').getContext('2d');
+new Chart(barCtx, { type: 'bar', data: {
+  labels: ['DEPOSIT #1','WITHDRAWAL #2'],
+  datasets: [{ label: 'Amount ($)', data: [300.00,650.00],
+    backgroundColor: ['rgba(72,199,142,0.85)','rgba(255,99,132,0.85)'], borderRadius: 6 }]
+}, options: { plugins: { legend: { labels: { color: '#e2e8f0' }}},
+  scales: { x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' }},
+            y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' }}}}});
+const pieCtx = document.getElementById('pieChart').getContext('2d');
+new Chart(pieCtx, { type: 'doughnut', data: {
+  labels: ['Deposits','Withdrawals'],
+  datasets: [{ data: [300.00,650.00],
+    backgroundColor: ['rgba(72,199,142,0.85)','rgba(255,99,132,0.85)'],
+    borderColor: ['#0f172a','#0f172a'], borderWidth: 3 }]
+}, options: { plugins: { legend: { labels: { color: '#e2e8f0' }}}}});
+</script>
+</body>
+</html>
